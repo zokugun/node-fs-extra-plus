@@ -1,4 +1,3 @@
-import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import process from 'node:process';
@@ -9,6 +8,10 @@ const TEST_DIR = path.join(os.tmpdir(), 'test-fs-extra', 'copy-async-preserve-ti
 const SRC = path.join(TEST_DIR, 'src');
 const DEST = path.join(TEST_DIR, 'dest');
 const FILES = ['a-file', path.join('a-folder', 'another-file'), path.join('a-folder', 'another-folder', 'file3')];
+const TEST_CASES = [
+	{ subcase: 'writable', readonly: false },
+	{ subcase: 'readonly', readonly: true },
+];
 
 beforeEach(async () => {
 	await fse.emptyDirAsync(TEST_DIR);
@@ -20,20 +23,17 @@ afterEach(async () => {
 
 describe.skipIf(process.arch === 'ia32')('copySync() - preserveTimestamps option', () => {
 	describe('> when preserveTimestamps option is true', () => {
-		for(const parameters of [
-			{ subcase: 'writable', readonly: false },
-			{ subcase: 'readonly', readonly: true },
-		]) {
-			describe(`>> with ${parameters.subcase} source files`, () => {
-				beforeEach(() => setupFixture(parameters.readonly));
+		for(const testCase of TEST_CASES) {
+			describe(`>> with ${testCase.subcase} source files`, () => {
+				beforeEach(() => setupFixture(testCase.readonly));
 
 				it('should have the same timestamps on copy', async () => {
 					await fse.copyAsync(SRC, DEST, { preserveTimestamps: true });
 
-					const action = testFile({ preserveTimestamps: true });
+					const test = testFile({ preserveTimestamps: true });
 
 					for(const file of FILES) {
-						action(file);
+						test(file);
 					}
 				});
 			});
@@ -63,8 +63,17 @@ function testFile(options: { preserveTimestamps: boolean }) {
 	return function (file: string) {
 		const a = path.join(SRC, file);
 		const b = path.join(DEST, file);
-		const fromStat = fs.statSync(a);
-		const toStat = fs.statSync(b);
+
+		const fromStatResult = fse.statSync(a);
+		expect(fromStatResult.fails).to.be.false;
+		expect(fromStatResult.value).toBeDefined();
+
+		const toStatResult = fse.statSync(b);
+		expect(toStatResult.fails).to.be.false;
+		expect(toStatResult.value).toBeDefined();
+
+		const fromStat = fromStatResult.value!;
+		const toStat = toStatResult.value!;
 
 		if(options.preserveTimestamps) {
 			// Windows sub-second precision fixed: https://github.com/nodejs/io.js/issues/2069
