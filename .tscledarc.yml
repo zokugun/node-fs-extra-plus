@@ -1,0 +1,8 @@
+entry:
+  .: index.ts
+  async: async.ts
+  sync: sync.ts
+format:
+  - esm
+  - cjs
+outDir: lib

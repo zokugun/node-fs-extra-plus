@@ -1,0 +1,101 @@
+{
+	"name": "@zokugun/fs-extra-plus",
+	"description": "Wraps `node:fs` to fully typed functions that resolve to a `Result`. Includes new functions.",
+	"version": "0.0.0",
+	"author": {
+		"name": "Baptiste Augrain",
+		"email": "daiyam@zokugun.org"
+	},
+	"license": "MIT",
+	"homepage": "https://github.com/zokugun/node-fs-extra-plus",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/zokugun/node-fs-extra-plus.git"
+	},
+	"bugs": {
+		"url": "https://github.com/zokugun/node-fs-extra-plus/discussions/categories/issue-triage"
+	},
+	"type": "module",
+	"exports": {
+		".": {
+			"import": "./lib/esm/index.mjs",
+			"require": "./lib/cjs/index.cjs"
+		},
+		"./async": {
+			"import": "./lib/esm/async.mjs",
+			"require": "./lib/cjs/async.cjs"
+		},
+		"./sync": {
+			"import": "./lib/esm/sync.mjs",
+			"require": "./lib/cjs/sync.cjs"
+		}
+	},
+	"main": "lib/cjs/index.cjs",
+	"module": "lib/esm/index.mjs",
+	"typesVersions": {
+		"*": {
+			".": [
+				"./lib/cjs/index.d.cts"
+			],
+			"async": [
+				"./lib/cjs/async.d.cts"
+			],
+			"sync": [
+				"./lib/cjs/sync.d.cts"
+			]
+		}
+	},
+	"scripts": {
+		"build": "npm run clean && npm run build:lib",
+		"build:lib": "tsc-leda generate",
+		"build:package": "tsc-leda update-package",
+		"clean": "rimraf lib .src .test",
+		"commit": "cz",
+		"compile:src": "tsc -p src",
+		"compile:test": "tsc -p test",
+		"lint": "xo",
+		"lint:fix": "xo --fix",
+		"prepack": "npm run build compile",
+		"prepare": "husky; fixpack || true",
+		"release": "release-it",
+		"test": "vitest run --reporter tree",
+		"test:coverage": "vitest run --reporter tree --coverage --coverage.reporter text",
+		"test:ui": "vitest --ui --coverage",
+		"test:watch": "vitest",
+		"watch:src": "tsc-watch -p src",
+		"watch:test": "tsc-watch -p test"
+	},
+	"dependencies": {
+		"@zokugun/is-it-type": "^0.4.0",
+		"@zokugun/xtry": "^0.10.0"
+	},
+	"devDependencies": {
+		"@commitlint/cli": "^19.7.1",
+		"@commitlint/config-conventional": "^19.7.1",
+		"@types/fs-extra": "^11.0.4",
+		"@types/klaw": "^3.0.7",
+		"@types/klaw-sync": "^6.0.5",
+		"@types/node": "^24.1.0",
+		"@vitest/coverage-v8": "^4.0.17",
+		"@vitest/ui": "^4.0.17",
+		"@zokugun/tsc-leda": "^0.1.0",
+		"commitizen": "^4.3.1",
+		"fixpack": "^4.0.0",
+		"fs-extra": "^11.3.3",
+		"globby": "^16.1.0",
+		"husky": "^9.1.7",
+		"klaw": "^4.1.0",
+		"klaw-sync": "^7.0.0",
+		"lint-staged": "^16.1.4",
+		"release-it": "^18.1.2",
+		"tsc-watch": "^6.3.0",
+		"typescript": "^5.7.3",
+		"vitest": "^4.0.16",
+		"xo": "0.60.0"
+	},
+	"keywords": [
+		"file",
+		"fs",
+		"result"
+	]
+}
