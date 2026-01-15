@@ -56,6 +56,9 @@ jobs:
       - name: Unompress artifact
         run: |
           tar -xzf ./compiled.tar.gz
+      - name: Install dependencies
+        run: |
+          npm install
       - name: Test
         run: |
           npm run test
