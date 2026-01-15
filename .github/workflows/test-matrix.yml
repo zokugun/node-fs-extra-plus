@@ -53,6 +53,9 @@ jobs:
         uses: actions/download-artifact@v7
         with:
           name: compiled
+      - name: Unompress artifact
+        run: |
+          tar -xzf ./compiled.tar.gz
       - name: Test
         run: |
           npm run test
