@@ -78,7 +78,7 @@
 		"@types/node": "^24.1.0",
 		"@vitest/coverage-v8": "^4.0.17",
 		"@vitest/ui": "^4.0.17",
-		"@zokugun/tsc-leda": "^0.1.0",
+		"@zokugun/tsc-leda": "^0.1.2",
 		"commitizen": "^4.3.1",
 		"fixpack": "^4.0.0",
 		"fs-extra": "^11.3.3",
