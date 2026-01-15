@@ -5,7 +5,7 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import fse from '../../src/index.js';
 
 const TEST_DIR = path.join(os.tmpdir(), 'test-fs-extra', 'copy-sync-case-insensitive-paths');
-const platform = os.platform();
+const PLATFORM = os.platform();
 
 beforeEach(async () => {
 	await fse.emptyDirAsync(TEST_DIR);
@@ -25,11 +25,11 @@ describe('> when src is a directory', () => {
 
 		const result = fse.copySync(source, destination);
 
-		if(platform === 'darwin' || platform === 'win32') {
+		if(PLATFORM === 'darwin' || PLATFORM === 'win32') {
 			expect(result.fails).to.be.true;
 			expect(result.error!.message).to.equals('Source and destination must not be the same.');
 		}
-		else if(platform === 'linux') {
+		else if(PLATFORM === 'linux') {
 			expect(result.fails).to.be.false;
 			expect(fs.existsSync(destination)).to.be.true;
 			expect(fs.readFileSync(path.join(destination, 'subdir', 'file.txt'), 'utf8')).to.equal('some data');
@@ -47,11 +47,11 @@ describe('> when src is a file', () => {
 
 		const result = fse.copySync(source, destination);
 
-		if(platform === 'darwin' || platform === 'win32') {
+		if(PLATFORM === 'darwin' || PLATFORM === 'win32') {
 			expect(result.fails).to.be.true;
 			expect(result.error!.message).to.equals('Source and destination must not be the same.');
 		}
-		else if(platform === 'linux') {
+		else if(PLATFORM === 'linux') {
 			expect(result.fails).to.be.false;
 			expect(fs.existsSync(destination)).to.be.true;
 			expect(fs.readFileSync(destination, 'utf8')).to.equal('some data');
@@ -73,11 +73,11 @@ describe('> when src is a symlink', () => {
 
 		const result = fse.copySync(sourceLink, destination);
 
-		if(platform === 'darwin' || platform === 'win32') {
+		if(PLATFORM === 'darwin' || PLATFORM === 'win32') {
 			expect(result.fails).to.be.true;
 			expect(result.error!.message).to.equals('Source and destination must not be the same.');
 		}
-		else if(platform === 'linux') {
+		else if(PLATFORM === 'linux') {
 			expect(result.fails).to.be.false;
 			expect(fs.existsSync(destination)).to.be.true;
 			expect(fs.readFileSync(path.join(destination, 'subdir', 'file.txt'), 'utf8')).to.equal('some data');
@@ -98,11 +98,11 @@ describe('> when src is a symlink', () => {
 
 		const result = fse.copySync(sourceLink, destination);
 
-		if(platform === 'darwin' || platform === 'win32') {
+		if(PLATFORM === 'darwin' || PLATFORM === 'win32') {
 			expect(result.fails).to.be.true;
 			expect(result.error!.message).to.equals('Source and destination must not be the same.');
 		}
-		else if(platform === 'linux') {
+		else if(PLATFORM === 'linux') {
 			expect(result.fails).to.be.false;
 			expect(fs.existsSync(destination)).to.be.true;
 			expect(fs.readFileSync(destination, 'utf8')).to.equal('some data');

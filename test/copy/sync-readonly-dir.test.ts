@@ -11,6 +11,7 @@ const FILES = [
 	path.join('dir1', 'dir2', 'file2.txt'),
 	path.join('dir1', 'dir2', 'dir3', 'file3.txt'),
 ];
+const PLATFORM = os.platform();
 
 beforeEach(async () => {
 	await fse.emptyDirAsync(TEST_DIR);
@@ -35,13 +36,13 @@ describe('> when src is readonly directory with content', () => {
 		const targetDir = path.join(TEST_DIR, 'target');
 
 		for(const source of sourceHierarchy) {
-			fse.chmodSync(source.path, source.stats.isDirectory() ? 0o555 : 0o444);
+			fse.chmodSync(source.path, getMode(source));
 		}
 
 		const sourceHierarchyCheck = klawSync(sourceDir);
 		// Stats.mode includes the file type bits, mask to compare permissions only
 		for(const source of sourceHierarchyCheck) {
-			expect(source.stats.mode & 0o777).to.equals(source.stats.isDirectory() ? 0o555 : 0o444);
+			expect(source.stats.mode & 0o777).to.equals(getMode(source));
 		}
 
 		const result = fse.copySync(sourceDir, targetDir);
@@ -54,7 +55,16 @@ describe('> when src is readonly directory with content', () => {
 		expect(targetHierarchy.length).to.equals(sourceHierarchy.length);
 
 		for(const target of targetHierarchy) {
-			expect(target.stats.mode & 0o777).to.equals(target.stats.isDirectory() ? 0o555 : 0o444);
+			expect(target.stats.mode & 0o777).to.equals(getMode(target));
 		}
 	});
 });
+
+function getMode(item: klawSync.Item): number {
+	if(PLATFORM === 'win32') {
+		return 0o444;
+	}
+	else {
+		return item.stats.isDirectory() ? 0o555 : 0o444;
+	}
+}

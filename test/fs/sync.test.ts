@@ -58,7 +58,7 @@ it('glob', () => { // {{{
 		for(const result of iterable) {
 			expect(result.fails).to.be.false;
 			expect(result.value).toBeTypeOf('string');
-			expect(path.relative(root, result.value!)).to.be.equals('fs/sync.test.ts');
+			expect(path.relative(root, result.value!)).to.be.equals(path.join('fs', 'sync.test.ts'));
 		}
 	}
 }); // }}}

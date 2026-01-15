@@ -18,7 +18,7 @@ it('glob', async () => { // {{{
 		for await (const result of iterable) {
 			expect(result.fails).to.be.false;
 			expect(result.value).toBeTypeOf('string');
-			expect(path.relative(root, result.value!)).to.be.equals('fs/async.test.ts');
+			expect(path.relative(root, result.value!)).to.be.equals(path.join('fs', 'async.test.ts'));
 		}
 	}
 }); // }}}

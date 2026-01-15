@@ -11,11 +11,11 @@ it.runIf(process.platform === 'win32')('when bad path, should return a cleaner e
 	let result = await fse.mkdirpAsync(dirPath);
 
 	expect(result.fails).to.be.true;
-	expect(result.error!.code).to.equals('EINVAL');
+	expect(result.error!.code).to.equals('ENOENT');
 
 	dirPath = path.join(TEST_DIR, 'foo:moo');
 	result = await fse.mkdirpAsync(dirPath);
 
 	expect(result.fails).to.be.true;
-	expect(result.error!.code).to.equals('EINVAL');
+	expect(result.error!.code).to.equals('ENOENT');
 });
