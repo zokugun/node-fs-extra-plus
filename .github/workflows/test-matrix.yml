@@ -9,13 +9,8 @@ on:
     paths-ignore:
     - '**/*.md'
 jobs:
-  test:
-    strategy:
-      fail-fast: false
-      matrix:
-        node: [16.x, 18.x, 20.x, 22.x, 24.x]
-        os: [ubuntu-latest, macos-latest, windows-latest]
-    runs-on: ${{ matrix.os }}
+  compile:
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
@@ -24,13 +19,40 @@ jobs:
       - name: Setup Node.js environment
         uses: actions/setup-node@v6
         with:
-          node-version: ${{ matrix.node }}
+          node-version-file: '.nvmrc'
       - name: Install dependencies
         run: |
-          npm install
+          npm ci
       - name: Build
         run: |
           npm run build
+      - name: Compress artifact
+        run: |
+          tar -czf compiled.tar.gz *
+      - name: Upload artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: compiled
+          path: ./compiled.tar.gz
+          retention-days: 1
+  test:
+    needs:
+      - compile
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [14.x, 16.x, 18.x, 20.x, 22.x, 24.x]
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Download artifact
+        uses: actions/download-artifact@v7
+        with:
+          name: compiled
       - name: Test
         run: |
           npm run test
