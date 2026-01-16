@@ -1,6 +1,7 @@
 import type { Dir as NodeDir, Dirent } from 'node:fs';
 import { xtryAsync, xtrySync } from '@zokugun/xtry';
-import { type FsResult, type FsVoidResult } from '../utils/types.js';
+import { type FsResult } from './fs-result.js';
+import { type FsVoidResult } from './fs-void-result.js';
 
 export class Dir implements AsyncIterable<Dirent> {
 	private readonly dir: NodeDir;

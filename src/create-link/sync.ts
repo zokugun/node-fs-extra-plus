@@ -2,8 +2,8 @@ import path from 'node:path';
 import { OK } from '@zokugun/xtry';
 import { lstat, exists, link } from '../fs/sync.js';
 import { mkdirs } from '../make-dir/sync.js';
+import { type FsVoidResult } from '../types/fs-void-result.js';
 import { areIdentical } from '../utils/are-identical.js';
-import { type FsVoidResult } from '../utils/types.js';
 
 export function createLink(source: string, target: string): FsVoidResult {
 	const sourceStats = lstat(source);

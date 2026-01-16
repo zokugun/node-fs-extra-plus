@@ -1,8 +1,9 @@
 /* eslint-disable import/order,import/no-duplicates */
-import { Dirent, Stats } from 'node:fs';
-import { FsError, isFsError } from './utils/error.js';
-import { typeExports } from './utils/type-exports.js';
-import type { BigIntStats, FsResult, FsVoidResult, Mode } from './utils/type-exports.js';
+import { Dir } from './types/dir.js';
+import { typeExports } from './types/exports.js';
+import type { FsResult, FsVoidResult } from './types/exports.js';
+import { FsError } from './types/fs-error.js';
+import { isFsError } from './utils/is-fs-error.js';
 
 import {
 	access,
@@ -65,13 +66,10 @@ import { writeJSON, writeJson } from './write-json/sync.js';
 
 /* eslint-disable unicorn/prefer-export-from */
 export {
-	type BigIntStats,
 	type FsResult,
 	type FsVoidResult,
-	type Mode,
-	Dirent,
+	Dir,
 	FsError,
-	Stats,
 	access,
 	appendFile,
 	chmod,
@@ -145,9 +143,8 @@ export {
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
 	...typeExports,
-	Dirent,
+	Dir,
 	FsError,
-	Stats,
 	access,
 	appendFile,
 	chmod,

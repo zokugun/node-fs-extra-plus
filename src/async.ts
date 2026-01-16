@@ -1,8 +1,10 @@
 /* eslint-disable import/order,import/no-duplicates */
-import { Dirent, Stats } from 'node:fs';
-import { FsError, isFsError } from './utils/error.js';
-import { typeExports } from './utils/type-exports.js';
-import type { BigIntStats, FsResult, FsVoidResult, Mode } from './utils/type-exports.js';
+import { Dir } from './types/dir.js';
+import { typeExports } from './types/exports.js';
+import type { FsResult, FsVoidResult } from './types/exports.js';
+import { FileHandle } from './types/file-handle.js';
+import { FsError } from './types/fs-error.js';
+import { isFsError } from './utils/is-fs-error.js';
 
 import {
 	access,
@@ -29,7 +31,7 @@ import {
 	mkdir,
 	mkdtemp,
 	mkdtempDisposable,
-	open,
+	openAsBlob,
 	read,
 	readv,
 	readFile,
@@ -56,6 +58,7 @@ import { createSymlink, ensureSymlink } from './create-symlink/async.js';
 import { emptyDir, emptydir } from './empty-dir/async.js';
 import { ensureDir, mkdirp, mkdirs } from './make-dir/async.js';
 import { move } from './move/async.js';
+import { open } from './open/async.js';
 import { openDir, opendir } from './open-dir/async.js';
 import { outputFile } from './output-file/async.js';
 import { outputJSON, outputJson } from './output-json/async.js';
@@ -66,13 +69,11 @@ import { writeJSON, writeJson } from './write-json/async.js';
 
 /* eslint-disable unicorn/prefer-export-from */
 export {
-	type BigIntStats,
 	type FsResult,
 	type FsVoidResult,
-	type Mode,
-	Dirent,
+	Dir,
+	FileHandle,
 	FsError,
-	Stats,
 	access,
 	appendFile,
 	chmod,
@@ -112,6 +113,7 @@ export {
 	mkdtempDisposable,
 	move,
 	open,
+	openAsBlob,
 	openDir,
 	opendir,
 	outputFile,
@@ -147,9 +149,9 @@ export {
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
 	...typeExports,
-	Dirent,
+	Dir,
+	FileHandle,
 	FsError,
-	Stats,
 	access,
 	appendFile,
 	chmod,
@@ -183,6 +185,7 @@ export default {
 	mkdtemp,
 	mkdtempDisposable,
 	open,
+	openAsBlob,
 	opendir,
 	outputFile,
 	outputJSON,

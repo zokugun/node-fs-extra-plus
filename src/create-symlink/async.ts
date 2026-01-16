@@ -3,9 +3,9 @@ import path from 'node:path';
 import { err, ok, OK, type Result } from '@zokugun/xtry';
 import { stat, lstat, exists, symlink } from '../fs/async.js';
 import { mkdirs } from '../make-dir/async.js';
+import { FsError } from '../types/fs-error.js';
+import { type FsResult } from '../types/fs-result.js';
 import { areIdentical } from '../utils/are-identical.js';
-import { FsError } from '../utils/error.js';
-import { type FsResult } from '../utils/types.js';
 
 export async function createSymlink(source: string, target: string, type?: fs.symlink.Type | null): Promise<Result<void, NodeJS.ErrnoException | Error>> {
 	const stats = await lstat(target);

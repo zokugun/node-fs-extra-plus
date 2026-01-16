@@ -1,5 +1,5 @@
 import { close, futimes, open } from '../fs/sync.js';
-import { type FsVoidResult } from './types.js';
+import { type FsVoidResult } from '../types/fs-void-result.js';
 
 export function utimesMillisSync(path: string, atime: Date, mtime: Date): FsVoidResult {
 	const openResult = open(path, 'r+');

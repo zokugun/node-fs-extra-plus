@@ -2,7 +2,7 @@ import path from 'node:path';
 import { OK } from '@zokugun/xtry';
 import { stat, writeFile } from '../fs/sync.js';
 import { mkdirs } from '../make-dir/sync.js';
-import { type FsVoidResult } from '../utils/types.js';
+import { type FsVoidResult } from '../types/fs-void-result.js';
 
 export function createFile(file: string): FsVoidResult {
 	const fileStats = stat(file);

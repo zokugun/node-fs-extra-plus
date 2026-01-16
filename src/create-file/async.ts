@@ -2,7 +2,7 @@ import path from 'node:path';
 import { OK } from '@zokugun/xtry';
 import { stat, writeFile } from '../fs/async.js';
 import { mkdirs } from '../make-dir/async.js';
-import { type FsVoidResult } from '../utils/types.js';
+import { type FsVoidResult } from '../types/fs-void-result.js';
 
 export async function createFile(file: string): Promise<FsVoidResult> {
 	const fileStats = await stat(file);

@@ -2,9 +2,9 @@ import { type BigIntStats } from 'node:fs';
 import path from 'node:path';
 import { err, OK } from '@zokugun/xtry/sync';
 import { stat } from '../fs/sync.js';
+import { FsError } from '../types/fs-error.js';
+import { type FsVoidResult } from '../types/fs-void-result.js';
 import { areIdentical } from './are-identical.js';
-import { FsError } from './error.js';
-import { type FsVoidResult } from './types.js';
 
 export function checkParentPathsSync(source: string, sourceStat: BigIntStats, destination: string, funcName: 'copy' | 'move'): FsVoidResult {
 	const sourceParent = path.resolve(path.dirname(source));

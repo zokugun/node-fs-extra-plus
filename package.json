@@ -93,6 +93,9 @@
 		"vitest": "^4.0.16",
 		"xo": "0.60.0"
 	},
+	"optionalDependencies": {
+		"mime-types": "*"
+	},
 	"keywords": [
 		"file",
 		"fs",

@@ -6,7 +6,3 @@ export class FsError extends Error {
 		Error.captureStackTrace?.(this, asserter ?? this.constructor);
 	}
 }
-
-export function isFsError(err: any): err is FsError {
-	return err instanceof FsError;
-}

@@ -5,7 +5,7 @@ import process from 'node:process';
 import { isString } from '@zokugun/is-it-type';
 import { err } from '@zokugun/xtry/sync';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { type FsVoidResult } from '../../src/utils/types.js';
+import { type FsVoidResult } from '../../src/types/fs-void-result.js';
 
 let $renameErrorCode: string | null = null;
 let $renameCallCount = 0;

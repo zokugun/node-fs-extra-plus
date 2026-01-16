@@ -2,10 +2,10 @@ import { type BigIntStats } from 'node:fs';
 import path from 'node:path';
 import { err, ok } from '@zokugun/xtry/sync';
 import { stat, lstat } from '../fs/sync.js';
+import { FsError } from '../types/fs-error.js';
+import { type FsResult } from '../types/fs-result.js';
 import { areIdentical } from './are-identical.js';
-import { FsError } from './error.js';
 import { isSourceSubdir } from './is-source-subdir.js';
-import { type FsResult } from './types.js';
 
 export function checkPathsSync(source: string, destination: string, funcName: 'copy' | 'move', options: { dereference?: boolean }): FsResult<{ srcStat: BigIntStats; destStat: BigIntStats | null; isChangingCase?: boolean }> {
 	const stats = getStats(source, destination, options);

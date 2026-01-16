@@ -5,10 +5,10 @@ import { rename } from '../fs/async.js';
 import { mkdirs } from '../make-dir/async.js';
 import { pathExists } from '../path-exists/async.js';
 import { remove } from '../remove/async.js';
+import { FsError } from '../types/fs-error.js';
+import { type FsVoidResult } from '../types/fs-void-result.js';
 import { checkParentPathsAsync } from '../utils/check-parent-paths-async.js';
 import { checkPathsAsync } from '../utils/check-paths-async.js';
-import { FsError } from '../utils/error.js';
-import { type FsVoidResult } from '../utils/types.js';
 
 type MoveOptions = {
 	dereference?: boolean;

@@ -6,11 +6,12 @@ import * as fs from '../fs/async.js';
 import { mkdirs } from '../make-dir/async.js';
 import { openDir } from '../open-dir/async.js';
 import { pathExists } from '../path-exists/async.js';
+import { FsError } from '../types/fs-error.js';
+import { type FsResult } from '../types/fs-result.js';
+import { type FsVoidResult } from '../types/fs-void-result.js';
 import { checkParentPathsAsync } from '../utils/check-parent-paths-async.js';
 import { checkPathsAsync } from '../utils/check-paths-async.js';
-import { FsError } from '../utils/error.js';
 import { isSourceSubdir } from '../utils/is-source-subdir.js';
-import { type FsResult, type FsVoidResult } from '../utils/types.js';
 import { utimesMillisAsync } from '../utils/utimes-async.js';
 import { type CopyFilterAsync, type CopyOptions, type CopyOptionsInput, normalizeOptions } from './options.js';
 

@@ -1,7 +1,7 @@
 import fs, { type OpenDirOptions, type PathLike } from 'node:fs';
 import { type Failure, ok, xtry } from '@zokugun/xtry/sync';
-import { type FsResult } from '../utils/types.js';
-import { Dir } from './dir.js';
+import { Dir } from '../types/dir.js';
+import { type FsResult } from '../types/fs-result.js';
 
 export function openDir(path: PathLike, options?: OpenDirOptions): FsResult<Dir> {
 	const result = xtry(() => fs.opendirSync(path, options));

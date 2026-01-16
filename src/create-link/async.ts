@@ -2,8 +2,8 @@ import path from 'node:path';
 import { OK } from '@zokugun/xtry';
 import { lstat, exists, link } from '../fs/async.js';
 import { mkdirs } from '../make-dir/async.js';
+import { type FsVoidResult } from '../types/fs-void-result.js';
 import { areIdentical } from '../utils/are-identical.js';
-import { type FsVoidResult } from '../utils/types.js';
 
 export async function createLink(source: string, target: string): Promise<FsVoidResult> {
 	const sourceStats = await lstat(source);

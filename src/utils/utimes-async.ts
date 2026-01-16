@@ -1,5 +1,6 @@
-import { close, futimes, open } from '../fs/async.js';
-import { type FsVoidResult } from './types.js';
+import { futimes } from '../fs/async.js';
+import { open } from '../open/async.js';
+import { type FsVoidResult } from '../types/fs-void-result.js';
 
 export async function utimesMillisAsync(path: string, atime: Date, mtime: Date): Promise<FsVoidResult> {
 	const openResult = await open(path, 'r+');
@@ -7,11 +8,11 @@ export async function utimesMillisAsync(path: string, atime: Date, mtime: Date):
 		return openResult;
 	}
 
-	const { fd } = openResult.value;
+	const file = openResult.value;
 
-	const futResult = await futimes(fd, atime, mtime);
+	const futResult = await futimes(file.fd, atime, mtime);
 
-	const result = await close(fd);
+	const result = await file.close();
 	if(result.fails) {
 		return result;
 	}

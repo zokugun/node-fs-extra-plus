@@ -6,11 +6,12 @@ import * as fs from '../fs/sync.js';
 import { mkdirs } from '../make-dir/sync.js';
 import { openDir } from '../open-dir/sync.js';
 import { pathExists } from '../path-exists/sync.js';
+import { FsError } from '../types/fs-error.js';
+import { type FsResult } from '../types/fs-result.js';
+import { type FsVoidResult } from '../types/fs-void-result.js';
 import { checkParentPathsSync } from '../utils/check-parent-paths-sync.js';
 import { checkPathsSync } from '../utils/check-paths-sync.js';
-import { FsError } from '../utils/error.js';
 import { isSourceSubdir } from '../utils/is-source-subdir.js';
-import { type FsResult, type FsVoidResult } from '../utils/types.js';
 import { utimesMillisSync } from '../utils/utimes-sync.js';
 import { type CopyFilterSync, type CopyOptions, type CopyOptionsInput, normalizeOptions } from './options.js';
 

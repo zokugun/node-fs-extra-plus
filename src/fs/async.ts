@@ -4,7 +4,6 @@ import { type AsyncFunction, xtryify, xtryifyIterable } from '@zokugun/xtry/asyn
 import { toPromise } from '../utils/to-promise.js';
 
 const xtryifyFs = <Fn extends (...args: any[]) => any>(fn: AsyncFunction<Fn>) => xtryify<NodeJS.ErrnoException, Fn>(fn);
-
 const xtryifyIterableFs = <Fn extends (...args: any[]) => AsyncIterable<unknown>>(fn: Fn) => xtryifyIterable<NodeJS.ErrnoException, Fn>(fn);
 
 const access = xtryifyFs(fsa.access);
@@ -32,8 +31,9 @@ const lutimes = xtryifyFs(fsa.lutimes);
 const mkdir = xtryifyFs(fsa.mkdir);
 const mkdtemp = xtryifyFs(fsa.mkdtemp);
 const mkdtempDisposable = xtryifyFs(fsa.mkdtempDisposable);
-const open = xtryifyFs(fsa.open);
-const opendir = xtryifyFs(fsa.opendir);
+// const open = xtryifyFs(fsa.open);
+const openAsBlob = xtryifyFs(fs.openAsBlob ?? import('../open-as-blob/async.js'));
+// const opendir = xtryifyFs(fsa.opendir);
 const read = xtryifyFs(toPromise(fs.read));
 const readv = xtryifyFs(toPromise(fs.readv));
 const readFile = xtryifyFs(fsa.readFile);
@@ -78,8 +78,9 @@ export {
 	mkdir,
 	mkdtemp,
 	mkdtempDisposable,
-	open,
-	opendir,
+	// open,
+	openAsBlob,
+	// opendir,
 	read,
 	readv,
 	readFile,

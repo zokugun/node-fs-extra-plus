@@ -1,8 +1,10 @@
 /* eslint-disable import/order,import/no-duplicates */
-import { Dirent, Stats } from 'node:fs';
-import { FsError, isFsError } from './utils/error.js';
-import { typeExports } from './utils/type-exports.js';
-import type { BigIntStats, FsResult, FsVoidResult, Mode } from './utils/type-exports.js';
+import { Dir } from './types/dir.js';
+import { typeExports } from './types/exports.js';
+import type { FsResult, FsVoidResult } from './types/exports.js';
+import { FileHandle } from './types/file-handle.js';
+import { FsError } from './types/fs-error.js';
+import { isFsError } from './utils/is-fs-error.js';
 
 import {
 	access as accessAsync,
@@ -29,7 +31,7 @@ import {
 	mkdir as mkdirAsync,
 	mkdtemp as mkdtempAsync,
 	mkdtempDisposable as mkdtempDisposableAsync,
-	open as openAsync,
+	openAsBlob as openAsBlobAsync,
 	read as readAsync,
 	readv as readvAsync,
 	readFile as readFileAsync,
@@ -56,6 +58,7 @@ import { createSymlink as createSymlinkAsync, ensureSymlink as ensureSymlinkAsyn
 import { emptyDir as emptyDirAsync, emptydir as emptydirAsync } from './empty-dir/async.js';
 import { ensureDir as ensureDirAsync, mkdirp as mkdirpAsync, mkdirs as mkdirsAsync } from './make-dir/async.js';
 import { move as moveAsync } from './move/async.js';
+import { open as openAsync } from './open/async.js';
 import { openDir as openDirAsync, opendir as opendirAsync, openDir as openDirSync, opendir as opendirSync } from './open-dir/async.js';
 import { outputFile as outputFileAsync } from './output-file/async.js';
 import { outputJSON as outputJSONAsync, outputJson as outputJsonAsync } from './output-json/async.js';
@@ -125,13 +128,11 @@ import { writeJSON as writeJSONSync, writeJson as writeJsonSync } from './write-
 
 /* eslint-disable unicorn/prefer-export-from */
 export {
-	type BigIntStats,
 	type FsResult,
 	type FsVoidResult,
-	type Mode,
-	Dirent,
+	Dir,
+	FileHandle,
 	FsError,
-	Stats,
 	accessAsync,
 	accessSync,
 	appendFileAsync,
@@ -209,6 +210,7 @@ export {
 	moveSync,
 	openAsync,
 	openSync,
+	openAsBlobAsync,
 	openDirAsync,
 	openDirSync,
 	opendirAsync,
@@ -273,9 +275,9 @@ export {
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
 	...typeExports,
-	Dirent,
+	Dir,
+	FileHandle,
 	FsError,
-	Stats,
 	accessAsync,
 	accessSync,
 	appendFileAsync,
@@ -353,6 +355,7 @@ export default {
 	moveSync,
 	openAsync,
 	openSync,
+	openAsBlobAsync,
 	openDirAsync,
 	openDirSync,
 	opendirAsync,

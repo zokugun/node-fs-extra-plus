@@ -2,7 +2,6 @@ import fs from 'node:fs';
 import { type SyncFunction, xtryify, xtryifyIterable } from '@zokugun/xtry/sync';
 
 const xtryifyFs = <Fn extends (...args: any[]) => any>(fn: SyncFunction<Fn>) => xtryify<NodeJS.ErrnoException, Fn>(fn);
-
 const xtryifyIterableFs = <Fn extends (...args: any[]) => Iterable<unknown>>(fn: Fn) => xtryifyIterable<NodeJS.ErrnoException, Fn>(fn);
 
 const access = xtryifyFs(fs.accessSync);

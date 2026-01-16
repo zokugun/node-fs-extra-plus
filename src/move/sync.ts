@@ -5,10 +5,10 @@ import { rename } from '../fs/sync.js';
 import { mkdirs } from '../make-dir/sync.js';
 import { pathExists } from '../path-exists/sync.js';
 import { remove } from '../remove/sync.js';
+import { FsError } from '../types/fs-error.js';
+import { type FsVoidResult } from '../types/fs-void-result.js';
 import { checkParentPathsSync } from '../utils/check-parent-paths-sync.js';
 import { checkPathsSync } from '../utils/check-paths-sync.js';
-import { FsError } from '../utils/error.js';
-import { type FsVoidResult } from '../utils/types.js';
 
 type MoveOptions = {
 	dereference?: boolean;
