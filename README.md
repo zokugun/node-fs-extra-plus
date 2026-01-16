@@ -7,7 +7,7 @@
 [![Donation](https://img.shields.io/badge/donate-liberapay-green)](https://liberapay.com/daiyam/donate)
 [![Donation](https://img.shields.io/badge/donate-paypal-green)](https://paypal.me/daiyam99)
 
-> Wraps `node:fs` to fully typed functions that resolve to a `Result`. Includes new functions.
+> Wraps `node:fs` to fully typed functions that resolve to a `Result`. Includes additional helpers.
 
 Overview
 --------
