@@ -45,6 +45,30 @@ it('600', () => {
 	expect(writeResult.fails).to.be.false;
 });
 
+it('060', () => {
+	const file = path.join(TEST_DIR, 'some-file.txt');
+	fse.outputFileSync(file, 'hello');
+	fse.chmodSync(file, 0o060);
+
+	const readResult = fse.readFileSync(file, 'utf8');
+	expect(readResult.fails).to.be.true;
+
+	const writeResult = fse.writeFileSync(file, 'hello world');
+	expect(writeResult.fails).to.be.true;
+});
+
+it('006', () => {
+	const file = path.join(TEST_DIR, 'some-file.txt');
+	fse.outputFileSync(file, 'hello');
+	fse.chmodSync(file, 0o006);
+
+	const readResult = fse.readFileSync(file, 'utf8');
+	expect(readResult.fails).to.be.true;
+
+	const writeResult = fse.writeFileSync(file, 'hello world');
+	expect(writeResult.fails).to.be.true;
+});
+
 it('444', () => {
 	const file = path.join(TEST_DIR, 'some-file.txt');
 	fse.outputFileSync(file, 'hello');
