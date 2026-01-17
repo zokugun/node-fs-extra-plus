@@ -74,6 +74,7 @@ import { outputJSON, outputJson } from './output-json/async.js';
 import { pathExists } from './path-exists/async.js';
 import { readJSON, readJson } from './read-json/async.js';
 import { remove } from './remove/async.js';
+import { touch } from './touch/async.js';
 import { writeJSON, writeJson } from './write-json/async.js';
 
 /* eslint-disable unicorn/prefer-export-from */
@@ -153,6 +154,7 @@ export {
 	stat,
 	statfs,
 	symlink,
+	touch,
 	truncate,
 	unlink,
 	utimes,
@@ -233,6 +235,7 @@ export default {
 	stat,
 	statfs,
 	symlink,
+	touch,
 	truncate,
 	unlink,
 	utimes,

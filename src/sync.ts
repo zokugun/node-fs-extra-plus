@@ -71,6 +71,7 @@ import { outputJSON, outputJson } from './output-json/sync.js';
 import { pathExists } from './path-exists/sync.js';
 import { readJSON, readJson } from './read-json/sync.js';
 import { remove } from './remove/sync.js';
+import { touch } from './touch/sync.js';
 import { writeJSON, writeJson } from './write-json/sync.js';
 
 /* eslint-disable unicorn/prefer-export-from */
@@ -147,6 +148,7 @@ export {
 	stat,
 	statfs,
 	symlink,
+	touch,
 	truncate,
 	unlink,
 	utimes,
@@ -226,6 +228,7 @@ export default {
 	stat,
 	statfs,
 	symlink,
+	touch,
 	truncate,
 	unlink,
 	utimes,

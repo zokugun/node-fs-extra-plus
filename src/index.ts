@@ -74,6 +74,7 @@ import { outputJSON as outputJSONAsync, outputJson as outputJsonAsync } from './
 import { pathExists as pathExistsAsync } from './path-exists/async.js';
 import { readJSON as readJSONAsync, readJson as readJsonAsync } from './read-json/async.js';
 import { remove as removeAsync } from './remove/async.js';
+import { touch as touchAsync } from './touch/async.js';
 import { writeJSON as writeJSONAsync, writeJson as writeJsonAsync } from './write-json/async.js';
 
 import {
@@ -142,6 +143,7 @@ import { outputJSON as outputJSONSync, outputJson as outputJsonSync } from './ou
 import { pathExists as pathExistsSync } from './path-exists/sync.js';
 import { readJSON as readJSONSync, readJson as readJsonSync } from './read-json/sync.js';
 import { remove as removeSync } from './remove/sync.js';
+import { touch as touchSync } from './touch/sync.js';
 import { writeJSON as writeJSONSync, writeJson as writeJsonSync } from './write-json/sync.js';
 
 /* eslint-disable unicorn/prefer-export-from */
@@ -289,6 +291,8 @@ export {
 	statfsSync,
 	symlinkAsync,
 	symlinkSync,
+	touchAsync,
+	touchSync,
 	truncateAsync,
 	truncateSync,
 	unlinkAsync,
@@ -452,6 +456,8 @@ export default {
 	statfsSync,
 	symlinkAsync,
 	symlinkSync,
+	touchAsync,
+	touchSync,
 	truncateAsync,
 	truncateSync,
 	unlinkAsync,
