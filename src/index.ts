@@ -56,6 +56,15 @@ import { createFile as createFileAsync, ensureFile as ensureFileAsync } from './
 import { createLink as createLinkAsync, ensureLink as ensureLinkAsync } from './create-link/async.js';
 import { createSymlink as createSymlinkAsync, ensureSymlink as ensureSymlinkAsync } from './create-symlink/async.js';
 import { emptyDir as emptyDirAsync, emptydir as emptydirAsync } from './empty-dir/async.js';
+import { isDir as isDirAsync } from './is-dir/async.js';
+import { isEmptyDir as isEmptyDirAsync } from './is-empty-dir/async.js';
+import { isEmptyFile as isEmptyFileAsync } from './is-empty-file/async.js';
+import { isExisting as isExistingAsync } from './is-existing/async.js';
+import { isFile as isFileAsync } from './is-file/async.js';
+import { isLink as isLinkAsync } from './is-link/async.js';
+import { isNonEmptyDir as isNonEmptyDirAsync } from './is-non-empty-dir/async.js';
+import { isNonEmptyFile as isNonEmptyFileAsync } from './is-non-empty-file/async.js';
+import { isSymlink as isSymlinkAsync } from './is-symlink/async.js';
 import { ensureDir as ensureDirAsync, mkdirp as mkdirpAsync, mkdirs as mkdirsAsync } from './make-dir/async.js';
 import { move as moveAsync } from './move/async.js';
 import { open as openAsync } from './open/async.js';
@@ -117,6 +126,15 @@ import { createFile as createFileSync, ensureFile as ensureFileSync } from './cr
 import { createLink as createLinkSync, ensureLink as ensureLinkSync } from './create-link/sync.js';
 import { createSymlink as createSymlinkSync, ensureSymlink as ensureSymlinkSync } from './create-symlink/sync.js';
 import { emptyDir as emptyDirSync, emptydir as emptydirSync } from './empty-dir/sync.js';
+import { isDir as isDirSync } from './is-dir/sync.js';
+import { isEmptyDir as isEmptyDirSync } from './is-empty-dir/sync.js';
+import { isEmptyFile as isEmptyFileSync } from './is-empty-file/sync.js';
+import { isExisting as isExistingSync } from './is-existing/sync.js';
+import { isFile as isFileSync } from './is-file/sync.js';
+import { isLink as isLinkSync } from './is-link/sync.js';
+import { isNonEmptyDir as isNonEmptyDirSync } from './is-non-empty-dir/sync.js';
+import { isNonEmptyFile as isNonEmptyFileSync } from './is-non-empty-file/sync.js';
+import { isSymlink as isSymlinkSync } from './is-symlink/sync.js';
 import { ensureDir as ensureDirSync, mkdirp as mkdirpSync, mkdirs as mkdirsSync } from './make-dir/sync.js';
 import { move as moveSync } from './move/sync.js';
 import { outputFile as outputFileSync } from './output-file/sync.js';
@@ -185,7 +203,25 @@ export {
 	futimesSync,
 	globAsync,
 	globSync,
+	isDirAsync,
+	isDirSync,
+	isEmptyDirAsync,
+	isEmptyDirSync,
+	isEmptyFileAsync,
+	isEmptyFileSync,
+	isExistingAsync,
+	isExistingSync,
+	isFileAsync,
+	isFileSync,
 	isFsError,
+	isLinkAsync,
+	isLinkSync,
+	isNonEmptyDirAsync,
+	isNonEmptyDirSync,
+	isNonEmptyFileAsync,
+	isNonEmptyFileSync,
+	isSymlinkAsync,
+	isSymlinkSync,
 	lchmodAsync,
 	lchmodSync,
 	lchownAsync,
@@ -330,7 +366,25 @@ export default {
 	futimesSync,
 	globAsync,
 	globSync,
+	isDirAsync,
+	isDirSync,
+	isEmptyDirAsync,
+	isEmptyDirSync,
+	isEmptyFileAsync,
+	isEmptyFileSync,
+	isExistingAsync,
+	isExistingSync,
+	isFileAsync,
+	isFileSync,
 	isFsError,
+	isLinkAsync,
+	isLinkSync,
+	isNonEmptyDirAsync,
+	isNonEmptyDirSync,
+	isNonEmptyFileAsync,
+	isNonEmptyFileSync,
+	isSymlinkAsync,
+	isSymlinkSync,
 	lchmodAsync,
 	lchmodSync,
 	lchownAsync,

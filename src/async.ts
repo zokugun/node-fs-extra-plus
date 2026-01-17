@@ -56,6 +56,15 @@ import { createFile, ensureFile } from './create-file/async.js';
 import { createLink, ensureLink } from './create-link/async.js';
 import { createSymlink, ensureSymlink } from './create-symlink/async.js';
 import { emptyDir, emptydir } from './empty-dir/async.js';
+import { isDir } from './is-dir/sync.js';
+import { isEmptyDir } from './is-empty-dir/sync.js';
+import { isEmptyFile } from './is-empty-file/sync.js';
+import { isExisting } from './is-existing/sync.js';
+import { isFile } from './is-file/sync.js';
+import { isLink } from './is-link/sync.js';
+import { isNonEmptyDir } from './is-non-empty-dir/sync.js';
+import { isNonEmptyFile } from './is-non-empty-file/sync.js';
+import { isSymlink } from './is-symlink/sync.js';
 import { ensureDir, mkdirp, mkdirs } from './make-dir/async.js';
 import { move } from './move/async.js';
 import { open } from './open/async.js';
@@ -100,7 +109,16 @@ export {
 	ftruncate,
 	futimes,
 	glob,
+	isDir,
+	isEmptyDir,
+	isEmptyFile,
+	isExisting,
+	isFile,
 	isFsError,
+	isLink,
+	isNonEmptyDir,
+	isNonEmptyFile,
+	isSymlink,
 	lchmod,
 	lchown,
 	link,
@@ -173,7 +191,16 @@ export default {
 	ftruncate,
 	futimes,
 	glob,
+	isDir,
+	isEmptyDir,
+	isEmptyFile,
+	isExisting,
+	isFile,
 	isFsError,
+	isLink,
+	isNonEmptyDir,
+	isNonEmptyFile,
+	isSymlink,
 	lchmod,
 	lchown,
 	link,
