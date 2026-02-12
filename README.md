@@ -75,9 +75,10 @@ function main(): FsVoidResult {
 Entry points
 ------------
 
-- `@zokugun/fs-extra-plus` — mixed bundle exporting both async and sync helpers. **Functions have _Async_ or _Sync_ suffixes**
-- `@zokugun/fs-extra-plus/async` — promise-based helpers only. no suffixes.
-- `@zokugun/fs-extra-plus/sync` — synchronous counterparts. no suffixes.
+- `@zokugun/fs-extra-plus` — mixed bundle exporting both async, sync and mode helpers. **Functions have _Async_ or _Sync_ suffixes**
+- `@zokugun/fs-extra-plus/async` — async helpers only. no suffixes.
+- `@zokugun/fs-extra-plus/sync` — sync helpers only. no suffixes.
+- `@zokugun/fs-extra-plus/mode` — mode helpers only.
 
 Donations
 ---------
