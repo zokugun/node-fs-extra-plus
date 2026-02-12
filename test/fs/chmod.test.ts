@@ -95,7 +95,7 @@ it('444', () => {
 	expect(writeResult.fails).to.be.true;
 });
 
-it('222', () => {
+it.runIf(process.platform !== 'win32')('222', () => {
 	const file = path.join(TEST_DIR, 'some-file.txt');
 	fse.outputFileSync(file, 'hello');
 	fse.chmodSync(file, 0o222);
