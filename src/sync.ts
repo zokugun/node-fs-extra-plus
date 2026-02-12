@@ -3,6 +3,7 @@ import { Dir } from './types/dir.js';
 import { typeExports } from './types/exports.js';
 import type { FsResult, FsVoidResult } from './types/exports.js';
 import { FsError } from './types/fs-error.js';
+import { type WalkItem, type WalkOptions } from './types/walk.js';
 import { isFsError } from './utils/is-fs-error.js';
 
 import {
@@ -72,12 +73,15 @@ import { pathExists } from './path-exists/sync.js';
 import { readJSON, readJson } from './read-json/sync.js';
 import { remove } from './remove/sync.js';
 import { touch } from './touch/sync.js';
+import { walk } from './walk/sync.js';
 import { writeJSON, writeJson } from './write-json/sync.js';
 
 /* eslint-disable unicorn/prefer-export-from */
 export {
 	type FsResult,
 	type FsVoidResult,
+	type WalkItem,
+	type WalkOptions,
 	Dir,
 	FsError,
 	access,
@@ -152,6 +156,7 @@ export {
 	truncate,
 	unlink,
 	utimes,
+	walk,
 	write,
 	writev,
 	writeFile,
@@ -232,6 +237,7 @@ export default {
 	truncate,
 	unlink,
 	utimes,
+	walk,
 	write,
 	writev,
 	writeFile,

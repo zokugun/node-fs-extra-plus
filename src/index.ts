@@ -5,6 +5,7 @@ import { typeExports } from './types/exports.js';
 import type { FsResult, FsVoidResult } from './types/exports.js';
 import { FileHandle } from './types/file-handle.js';
 import { FsError } from './types/fs-error.js';
+import { type WalkItem, type WalkOptions } from './types/walk.js';
 import { isFsError } from './utils/is-fs-error.js';
 
 import {
@@ -76,6 +77,7 @@ import { pathExists as pathExistsAsync } from './path-exists/async.js';
 import { readJSON as readJSONAsync, readJson as readJsonAsync } from './read-json/async.js';
 import { remove as removeAsync } from './remove/async.js';
 import { touch as touchAsync } from './touch/async.js';
+import { walk as walkAsync } from './walk/async.js';
 import { writeJSON as writeJSONAsync, writeJson as writeJsonAsync } from './write-json/async.js';
 
 import {
@@ -145,12 +147,15 @@ import { pathExists as pathExistsSync } from './path-exists/sync.js';
 import { readJSON as readJSONSync, readJson as readJsonSync } from './read-json/sync.js';
 import { remove as removeSync } from './remove/sync.js';
 import { touch as touchSync } from './touch/sync.js';
+import { walk as walkSync } from './walk/sync.js';
 import { writeJSON as writeJSONSync, writeJson as writeJsonSync } from './write-json/sync.js';
 
 /* eslint-disable unicorn/prefer-export-from */
 export {
 	type FsResult,
 	type FsVoidResult,
+	type WalkItem,
+	type WalkOptions,
 	Dir,
 	FileHandle,
 	FsError,
@@ -301,6 +306,8 @@ export {
 	unlinkSync,
 	utimesAsync,
 	utimesSync,
+	walkAsync,
+	walkSync,
 	writeAsync,
 	writeSync,
 	writevAsync,
@@ -467,6 +474,8 @@ export default {
 	unlinkSync,
 	utimesAsync,
 	utimesSync,
+	walkAsync,
+	walkSync,
 	writeAsync,
 	writeSync,
 	writevAsync,

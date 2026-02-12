@@ -4,6 +4,7 @@ import { typeExports } from './types/exports.js';
 import type { FsResult, FsVoidResult } from './types/exports.js';
 import { FileHandle } from './types/file-handle.js';
 import { FsError } from './types/fs-error.js';
+import { type WalkItem, type WalkOptions } from './types/walk.js';
 import { isFsError } from './utils/is-fs-error.js';
 
 import {
@@ -75,12 +76,15 @@ import { pathExists } from './path-exists/async.js';
 import { readJSON, readJson } from './read-json/async.js';
 import { remove } from './remove/async.js';
 import { touch } from './touch/async.js';
+import { walk } from './walk/async.js';
 import { writeJSON, writeJson } from './write-json/async.js';
 
 /* eslint-disable unicorn/prefer-export-from */
 export {
 	type FsResult,
 	type FsVoidResult,
+	type WalkItem,
+	type WalkOptions,
 	Dir,
 	FileHandle,
 	FsError,
@@ -158,6 +162,7 @@ export {
 	truncate,
 	unlink,
 	utimes,
+	walk,
 	write,
 	writev,
 	writeFile,
@@ -239,6 +244,7 @@ export default {
 	truncate,
 	unlink,
 	utimes,
+	walk,
 	write,
 	writev,
 	writeFile,
