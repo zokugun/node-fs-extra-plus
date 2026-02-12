@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import process from 'node:process';
 import klawSync from 'klaw-sync';
 import { afterEach, beforeEach, expect, it } from 'vitest';
 import fse from '../../src/index.js';
@@ -32,7 +33,7 @@ it('666', () => {
 	expect(writeResult.fails).to.be.false;
 });
 
-it('600', () => {
+it.runIf(process.platform !== 'win32')('600', () => {
 	const file = path.join(TEST_DIR, 'some-file.txt');
 	fse.outputFileSync(file, 'hello');
 	fse.chmodSync(file, 0o600);
@@ -45,7 +46,7 @@ it('600', () => {
 	expect(writeResult.fails).to.be.false;
 });
 
-it('060', () => {
+it.runIf(process.platform !== 'win32')('060', () => {
 	const file = path.join(TEST_DIR, 'some-file.txt');
 	fse.outputFileSync(file, 'hello');
 	fse.chmodSync(file, 0o060);
@@ -57,7 +58,7 @@ it('060', () => {
 	expect(writeResult.fails).to.be.true;
 });
 
-it('006', () => {
+it.runIf(process.platform !== 'win32')('006', () => {
 	const file = path.join(TEST_DIR, 'some-file.txt');
 	fse.outputFileSync(file, 'hello');
 	fse.chmodSync(file, 0o006);
@@ -69,7 +70,7 @@ it('006', () => {
 	expect(readResult.fails).to.be.true;
 });
 
-it('000', () => {
+it.runIf(process.platform !== 'win32')('000', () => {
 	const file = path.join(TEST_DIR, 'some-file.txt');
 	fse.outputFileSync(file, 'hello');
 	fse.chmodSync(file, 0o006);
