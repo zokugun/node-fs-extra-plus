@@ -62,7 +62,7 @@
 		"compile:test": "tsc -p test",
 		"lint": "xo",
 		"lint:fix": "xo --fix",
-		"prepack": "npm run build compile",
+		"prepack": "npm run build",
 		"prepare": "husky; fixpack || true",
 		"release": "release-it",
 		"test": "vitest run --reporter tree",
