@@ -1,7 +1,7 @@
 {
 	"name": "@zokugun/fs-extra-plus",
 	"description": "Wraps `node:fs` to fully typed functions that resolve to a `Result`. Includes additional helpers.",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"author": {
 		"name": "Baptiste Augrain",
 		"email": "daiyam@zokugun.org"
