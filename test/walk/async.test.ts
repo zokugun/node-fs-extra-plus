@@ -9,9 +9,9 @@ function absolute(pathname: string): string {
 }
 
 const TEST_DIR = path.join(os.tmpdir(), 'test-fs-extra', 'walk-async');
-const DIR_NAMES = ['dir1', 'dir2', 'dir2/dir2_1', 'dir2/dir2_1/dir2_1_1'];
+const DIR_NAMES = ['dir1', 'dir2', path.join('dir2', 'dir2_1'), path.join('dir2', 'dir2_1', 'dir2_1_1')];
 const DIR_PATHS = DIR_NAMES.map(absolute);
-const FILE_NAMES = ['dir1/file1_2', 'dir2/dir2_1/file2_1_1', 'file1'];
+const FILE_NAMES = [path.join('dir1', 'file1_2'), path.join('dir2', 'dir2_1', 'file2_1_1'), 'file1'];
 const FILE_PATHS = FILE_NAMES.map(absolute);
 
 beforeEach(async () => {
@@ -31,7 +31,7 @@ afterEach(async () => {
 });
 
 it('should return an error if the source dir does not exist', async () => {
-	const result = await fse.walkAsync('dirDoesNotExist/');
+	const result = await fse.walkAsync('dirDoesNotExist');
 
 	expect(result.fails).to.be.true;
 	expect(result.error!.code).to.equals('ENOENT');
@@ -360,7 +360,7 @@ describe('when opts.filter is true', () => {
 
 describe('depth limit', () => {
 	async function testDepthLimit(depthLimit: number, expected: string[], options: WalkOptions = {}) {
-		for(const file of ['a/b/c/d.txt', 'a/e.jpg', 'h/i/j/k.txt', 'h/i/l.txt', 'h/i/m.jpg', 't.txt']) {
+		for(const file of [path.join('a', 'b', 'c', 'd.txt'), path.join('a', 'e.jpg'), path.join('h', 'i', 'j', 'k.txt'), path.join('h', 'i', 'l.txt'), path.join('h', 'i', 'm.jpg'), 't.txt']) {
 			fse.outputFileSync(path.join(TEST_DIR, file), path.basename(file, path.extname(file)));
 		}
 
@@ -384,7 +384,7 @@ describe('depth limit', () => {
 	});
 
 	it('should honor depthLimit option -1', async () => {
-		await testDepthLimit(-1, ['a', 'a/b', 'a/b/c', 'a/b/c/d.txt', 'a/e.jpg', 'h', 'h/i', 'h/i/j', 'h/i/j/k.txt', 'h/i/l.txt', 'h/i/m.jpg', 't.txt']);
+		await testDepthLimit(-1, ['a', path.join('a', 'b'), path.join('a', 'b', 'c'), path.join('a', 'b', 'c', 'd.txt'), path.join('a', 'e.jpg'), 'h', path.join('h', 'i'), path.join('h', 'i', 'j'), path.join('h', 'i', 'j', 'k.txt'), path.join('h', 'i', 'l.txt'), path.join('h', 'i', 'm.jpg'), 't.txt']);
 	});
 
 	it('should honor depthLimit option 0', async () => {
@@ -392,19 +392,19 @@ describe('depth limit', () => {
 	});
 
 	it('should honor depthLimit option 1', async () => {
-		await testDepthLimit(1, ['a', 'a/b', 'a/e.jpg', 'h', 'h/i', 't.txt']);
+		await testDepthLimit(1, ['a', path.join('a', 'b'), path.join('a', 'e.jpg'), 'h', path.join('h', 'i'), 't.txt']);
 	});
 
 	it('should honor depthLimit option 2', async () => {
-		await testDepthLimit(2, ['a', 'a/b', 'a/b/c', 'a/e.jpg', 'h', 'h/i', 'h/i/j', 'h/i/l.txt', 'h/i/m.jpg', 't.txt']);
+		await testDepthLimit(2, ['a', path.join('a', 'b'), path.join('a', 'b', 'c'), path.join('a', 'e.jpg'), 'h', path.join('h', 'i'), path.join('h', 'i', 'j'), path.join('h', 'i', 'l.txt'), path.join('h', 'i', 'm.jpg'), 't.txt']);
 	});
 
 	it('should honor depthLimit option 3', async () => {
-		await testDepthLimit(3, ['a', 'a/b', 'a/b/c', 'a/b/c/d.txt', 'a/e.jpg', 'h', 'h/i', 'h/i/j', 'h/i/j/k.txt', 'h/i/l.txt', 'h/i/m.jpg', 't.txt']);
+		await testDepthLimit(3, ['a', path.join('a', 'b'), path.join('a', 'b', 'c'), path.join('a', 'b', 'c', 'd.txt'), path.join('a', 'e.jpg'), 'h', path.join('h', 'i'), path.join('h', 'i', 'j'), path.join('h', 'i', 'j', 'k.txt'), path.join('h', 'i', 'l.txt'), path.join('h', 'i', 'm.jpg'), 't.txt']);
 	});
 
 	it('should honor depthLimit option -1 with onlyFiles = true', async () => {
-		await testDepthLimit(-1, ['a/b/c/d.txt', 'a/e.jpg', 'h/i/j/k.txt', 'h/i/l.txt', 'h/i/m.jpg', 't.txt'], { onlyFiles: true });
+		await testDepthLimit(-1, [path.join('a', 'b', 'c', 'd.txt'), path.join('a', 'e.jpg'), path.join('h', 'i', 'j', 'k.txt'), path.join('h', 'i', 'l.txt'), path.join('h', 'i', 'm.jpg'), 't.txt'], { onlyFiles: true });
 	});
 
 	it('should honor depthLimit option 0 with onlyFiles = true', async () => {
@@ -412,25 +412,25 @@ describe('depth limit', () => {
 	});
 
 	it('should honor depthLimit option 1 with onlyFiles = true', async () => {
-		await testDepthLimit(1, ['a/e.jpg', 't.txt'], { onlyFiles: true });
+		await testDepthLimit(1, [path.join('a', 'e.jpg'), 't.txt'], { onlyFiles: true });
 	});
 
 	it('should honor depthLimit option -1 with onlyFiles = true and with a filter to search for a specific file', async () => {
 		const filter = (item: WalkItem) => item.stats.isDirectory() || path.basename(item.path) === 'k.txt';
 
-		await testDepthLimit(-1, ['h/i/j/k.txt'], { onlyFiles: true, filter });
+		await testDepthLimit(-1, [path.join('h', 'i', 'j', 'k.txt')], { onlyFiles: true, filter });
 	});
 
 	it('should return all files except under filtered out directory', async () => {
 		const filter = (item: WalkItem) => !item.stats.isDirectory() || (item.stats.isDirectory() && path.basename(item.path) !== 'h');
 
-		await testDepthLimit(-1, ['a/b/c/d.txt', 'a/e.jpg', 't.txt'], { onlyFiles: true, filter });
+		await testDepthLimit(-1, [path.join('a', 'b', 'c', 'd.txt'), path.join('a', 'e.jpg'), 't.txt'], { onlyFiles: true, filter });
 	});
 });
 
 describe('traverse all', () => {
 	async function testTraverseAll(options: WalkOptions, expected) {
-		for(const file of ['a/b/c/d.txt', 'a/e.jpg', 'h/i/j/k.txt', 'h/i/l.txt', 'h/i/m.jpg', 't.txt']) {
+		for(const file of [path.join('a', 'b', 'c', 'd.txt'), path.join('a', 'e.jpg'), path.join('h', 'i', 'j', 'k.txt'), path.join('h', 'i', 'l.txt'), path.join('h', 'i', 'm.jpg'), 't.txt']) {
 			fse.outputFileSync(path.join(TEST_DIR, file), path.basename(file, path.extname(file)));
 		}
 
@@ -454,29 +454,29 @@ describe('traverse all', () => {
 	});
 
 	it('should honor traverseAll option with no filter & onlyFiles: false', async () => {
-		await testTraverseAll({ onlyFiles: false }, ['a', 'a/b', 'a/b/c', 'a/b/c/d.txt', 'a/e.jpg', 'h', 'h/i', 'h/i/j', 'h/i/j/k.txt', 'h/i/l.txt', 'h/i/m.jpg', 't.txt']);
+		await testTraverseAll({ onlyFiles: false }, ['a', path.join('a', 'b'), path.join('a', 'b', 'c'), path.join('a', 'b', 'c', 'd.txt'), path.join('a', 'e.jpg'), 'h', path.join('h', 'i'), path.join('h', 'i', 'j'), path.join('h', 'i', 'j', 'k.txt'), path.join('h', 'i', 'l.txt'), path.join('h', 'i', 'm.jpg'), 't.txt']);
 	});
 
 	it('should honor traverseAll option with no filter & onlyFiles: true', async () => {
-		await testTraverseAll({ onlyFiles: true }, ['a/b/c/d.txt', 'a/e.jpg', 'h/i/j/k.txt', 'h/i/l.txt', 'h/i/m.jpg', 't.txt']);
+		await testTraverseAll({ onlyFiles: true }, [path.join('a', 'b', 'c', 'd.txt'), path.join('a', 'e.jpg'), path.join('h', 'i', 'j', 'k.txt'), path.join('h', 'i', 'l.txt'), path.join('h', 'i', 'm.jpg'), 't.txt']);
 	});
 
 	it('should honor traverseAll option with filter & onlyFiles: true', async () => {
 		const filter = (item: WalkItem) => path.extname(item.path) === '.txt';
 
-		await testTraverseAll({ onlyFiles: true, filter }, ['a/b/c/d.txt', 'h/i/j/k.txt', 'h/i/l.txt', 't.txt']);
+		await testTraverseAll({ onlyFiles: true, filter }, [path.join('a', 'b', 'c', 'd.txt'), path.join('h', 'i', 'j', 'k.txt'), path.join('h', 'i', 'l.txt'), 't.txt']);
 	});
 
 	it('should honor traverseAll option with filter & onlyFiles: false', async () => {
 		const filter = (item: WalkItem) => path.basename(item.path) !== 'i' && path.extname(item.path) !== '.txt';
 
-		await testTraverseAll({ onlyFiles: false, filter }, ['a', 'a/b', 'a/b/c', 'a/e.jpg', 'h', 'h/i/j', 'h/i/m.jpg']);
+		await testTraverseAll({ onlyFiles: false, filter }, ['a', path.join('a', 'b'), path.join('a', 'b', 'c'), path.join('a', 'e.jpg'), 'h', path.join('h', 'i', 'j'), path.join('h', 'i', 'm.jpg')]);
 	});
 });
 
 describe('symlinks', () => {
 	async function testSymlinks(preserveSymlinks: boolean, expected) {
-		for(const file of ['a/b/c/d.txt', 'a/e.jpg', 't.txt']) {
+		for(const file of [path.join('a', 'b', 'c', 'd.txt'), path.join('a', 'e.jpg'), 't.txt']) {
 			fse.outputFileSync(path.join(TEST_DIR, file), path.basename(file, path.extname(file)));
 		}
 
@@ -502,10 +502,10 @@ describe('symlinks', () => {
 	});
 
 	it('should honor preserveSymlinks option false', async () => {
-		await testSymlinks(false, ['a', 'a/b', 'a/b/c', 'a/b/c/d.txt', 'a/e.jpg', 'h', 'h/b', 'h/b/c', 'h/b/c/d.txt', 'h/e.jpg', 't.txt']);
+		await testSymlinks(false, ['a', path.join('a', 'b'), path.join('a', 'b', 'c'), path.join('a', 'b', 'c', 'd.txt'), path.join('a', 'e.jpg'), 'h', path.join('h', 'b'), path.join('h', 'b', 'c'), path.join('h', 'b', 'c', 'd.txt'), path.join('h', 'e.jpg'), 't.txt']);
 	});
 
 	it('should honor preserveSymlinks option true', async () => {
-		await testSymlinks(true, ['a', 'a/b', 'a/b/c', 'a/b/c/d.txt', 'a/e.jpg', 'h', 't.txt']);
+		await testSymlinks(true, ['a', path.join('a', 'b'), path.join('a', 'b', 'c'), path.join('a', 'b', 'c', 'd.txt'), path.join('a', 'e.jpg'), 'h', 't.txt']);
 	});
 });
