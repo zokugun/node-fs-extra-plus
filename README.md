@@ -19,6 +19,7 @@ Overview
 - publishing dual ESM/CJS builds with identical named exports,
 - tracking the latest Node.js `fs` additions (including `glob`, `mkdtempDisposable`, etc.),
 - shipping first-party async and sync entry points to help bundlers tree-shake unused helpers,
+- documenting the [mode helpers](docs/mode.md) so you can translate permissions between number, octal, stat, symbolic, and object forms.
 
 Installation
 ------------

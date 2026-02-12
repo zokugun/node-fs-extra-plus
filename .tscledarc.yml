@@ -2,6 +2,7 @@ entry:
   .: index.ts
   async: async.ts
   sync: sync.ts
+  mode: mode/index.ts
 format:
   - esm
   - cjs

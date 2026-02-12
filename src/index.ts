@@ -1,4 +1,5 @@
 /* eslint-disable import/order,import/no-duplicates */
+import * as mode from './mode/index.js';
 import { Dir } from './types/dir.js';
 import { typeExports } from './types/exports.js';
 import type { FsResult, FsVoidResult } from './types/exports.js';
@@ -153,6 +154,7 @@ export {
 	Dir,
 	FileHandle,
 	FsError,
+	mode,
 	accessAsync,
 	accessSync,
 	appendFileAsync,
@@ -318,6 +320,7 @@ export default {
 	Dir,
 	FileHandle,
 	FsError,
+	mode,
 	accessAsync,
 	accessSync,
 	appendFileAsync,
