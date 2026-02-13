@@ -72,7 +72,7 @@
 		"watch:test": "tsc-watch -p test"
 	},
 	"dependencies": {
-		"@zokugun/is-it-type": "^0.5.1",
+		"@zokugun/is-it-type": "^0.5.2",
 		"@zokugun/xtry": "^0.10.1"
 	},
 	"devDependencies": {
@@ -84,7 +84,7 @@
 		"@types/node": "^24.1.0",
 		"@vitest/coverage-v8": "^4.0.17",
 		"@vitest/ui": "^4.0.17",
-		"@zokugun/tsc-leda": "^0.1.6",
+		"@zokugun/tsc-leda": "^0.2.0",
 		"fixpack": "^4.0.0",
 		"fs-extra": "^11.3.3",
 		"globby": "^16.1.0",
