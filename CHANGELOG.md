@@ -1,5 +1,8 @@
 # Changelog
 
+## v0.2.1 | 2026-02-13
+- use latest `tsc-leda` to correctly generate `.cjs` and `.mjs` files
+
 ## v0.2.0 | 2026-02-13
 - add `createReadStream` and `createWriteStream` functions
 
