@@ -5,6 +5,7 @@ import { typeExports } from './types/exports.js';
 import type { FsResult, FsVoidResult } from './types/exports.js';
 import { FileHandle } from './types/file-handle.js';
 import { FsError } from './types/fs-error.js';
+import { type ReadStreamOptions, type WriteStreamOptions } from './types/stream.js';
 import { type WalkItem, type WalkOptions } from './types/walk.js';
 import { isFsError } from './utils/is-fs-error.js';
 
@@ -150,10 +151,15 @@ import { touch as touchSync } from './touch/sync.js';
 import { walk as walkSync } from './walk/sync.js';
 import { writeJSON as writeJSONSync, writeJson as writeJsonSync } from './write-json/sync.js';
 
+import { createReadStream } from './create-read-stream/index.js';
+import { createWriteStream } from './create-write-stream/index.js';
+
 /* eslint-disable unicorn/prefer-export-from */
 export {
 	type FsResult,
 	type FsVoidResult,
+	type ReadStreamOptions,
+	type WriteStreamOptions,
 	type WalkItem,
 	type WalkOptions,
 	Dir,
@@ -180,8 +186,10 @@ export {
 	createFileSync,
 	createLinkAsync,
 	createLinkSync,
+	createReadStream,
 	createSymlinkAsync,
 	createSymlinkSync,
+	createWriteStream,
 	emptyDirAsync,
 	emptyDirSync,
 	emptydirAsync,
@@ -348,8 +356,10 @@ export default {
 	createFileSync,
 	createLinkAsync,
 	createLinkSync,
+	createReadStream,
 	createSymlinkAsync,
 	createSymlinkSync,
+	createWriteStream,
 	emptyDirAsync,
 	emptyDirSync,
 	emptydirAsync,

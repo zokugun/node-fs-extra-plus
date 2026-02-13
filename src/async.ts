@@ -4,6 +4,7 @@ import { typeExports } from './types/exports.js';
 import type { FsResult, FsVoidResult } from './types/exports.js';
 import { FileHandle } from './types/file-handle.js';
 import { FsError } from './types/fs-error.js';
+import { type ReadStreamOptions, type WriteStreamOptions } from './types/stream.js';
 import { type WalkItem, type WalkOptions } from './types/walk.js';
 import { isFsError } from './utils/is-fs-error.js';
 
@@ -55,7 +56,9 @@ import {
 import { copy } from './copy/async.js';
 import { createFile, ensureFile } from './create-file/async.js';
 import { createLink, ensureLink } from './create-link/async.js';
+import { createReadStream } from './create-read-stream/index.js';
 import { createSymlink, ensureSymlink } from './create-symlink/async.js';
+import { createWriteStream } from './create-write-stream/index.js';
 import { emptyDir, emptydir } from './empty-dir/async.js';
 import { isDir } from './is-dir/sync.js';
 import { isEmptyDir } from './is-empty-dir/sync.js';
@@ -83,6 +86,8 @@ import { writeJSON, writeJson } from './write-json/async.js';
 export {
 	type FsResult,
 	type FsVoidResult,
+	type ReadStreamOptions,
+	type WriteStreamOptions,
 	type WalkItem,
 	type WalkOptions,
 	Dir,
@@ -98,7 +103,9 @@ export {
 	cp,
 	createFile,
 	createLink,
+	createReadStream,
 	createSymlink,
+	createWriteStream,
 	emptyDir,
 	emptydir,
 	ensureDir,
@@ -185,6 +192,10 @@ export default {
 	copyFile,
 	cp,
 	createFile,
+	createLink,
+	createReadStream,
+	createSymlink,
+	createWriteStream,
 	emptyDir,
 	emptydir,
 	ensureDir,
