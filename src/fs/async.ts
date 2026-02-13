@@ -31,6 +31,7 @@ const lutimes = xtryifyFs(fsa.lutimes);
 const mkdir = xtryifyFs(fsa.mkdir);
 const mkdtemp = xtryifyFs(fsa.mkdtemp);
 const mkdtempDisposable = xtryifyFs(fsa.mkdtempDisposable);
+const open = xtryifyFs(toPromise(fs.open));
 const openAsBlob = xtryifyFs(fs.openAsBlob ?? import('../open-as-blob/async.js'));
 const read = xtryifyFs(toPromise(fs.read));
 const readv = xtryifyFs(toPromise(fs.readv));
@@ -76,6 +77,7 @@ export {
 	mkdir,
 	mkdtemp,
 	mkdtempDisposable,
+	open,
 	openAsBlob,
 	read,
 	readv,

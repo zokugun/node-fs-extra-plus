@@ -1,8 +1,7 @@
 import path from 'node:path';
 import { OK } from '@zokugun/xtry/async';
-import { utimes } from '../fs/async.js';
+import { close, open, utimes } from '../fs/async.js';
 import { mkdirs } from '../make-dir/async.js';
-import { open } from '../open/async.js';
 import { type FsVoidResult } from '../types/fs-void-result.js';
 
 export async function touch(file: string): Promise<FsVoidResult> {
@@ -23,5 +22,5 @@ export async function touch(file: string): Promise<FsVoidResult> {
 		return openResult;
 	}
 
-	return openResult.value.close();
+	return close(openResult.value);
 }

@@ -33,6 +33,7 @@ import {
 	mkdir,
 	mkdtemp,
 	mkdtempDisposable,
+	open,
 	openAsBlob,
 	read,
 	readv,
@@ -71,7 +72,7 @@ import { isNonEmptyFile } from './is-non-empty-file/sync.js';
 import { isSymlink } from './is-symlink/sync.js';
 import { ensureDir, mkdirp, mkdirs } from './make-dir/async.js';
 import { move } from './move/async.js';
-import { open } from './open/async.js';
+import { openAsHandle } from './open-as-handle/async.js';
 import { openDir, opendir } from './open-dir/async.js';
 import { outputFile } from './output-file/async.js';
 import { outputJSON, outputJson } from './output-json/async.js';
@@ -144,6 +145,7 @@ export {
 	move,
 	open,
 	openAsBlob,
+	openAsHandle,
 	openDir,
 	opendir,
 	outputFile,
@@ -231,6 +233,7 @@ export default {
 	mkdtempDisposable,
 	open,
 	openAsBlob,
+	openAsHandle,
 	opendir,
 	outputFile,
 	outputJSON,

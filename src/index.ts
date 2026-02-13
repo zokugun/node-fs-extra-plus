@@ -34,6 +34,7 @@ import {
 	mkdir as mkdirAsync,
 	mkdtemp as mkdtempAsync,
 	mkdtempDisposable as mkdtempDisposableAsync,
+	open as openAsync,
 	openAsBlob as openAsBlobAsync,
 	read as readAsync,
 	readv as readvAsync,
@@ -70,7 +71,7 @@ import { isNonEmptyFile as isNonEmptyFileAsync } from './is-non-empty-file/async
 import { isSymlink as isSymlinkAsync } from './is-symlink/async.js';
 import { ensureDir as ensureDirAsync, mkdirp as mkdirpAsync, mkdirs as mkdirsAsync } from './make-dir/async.js';
 import { move as moveAsync } from './move/async.js';
-import { open as openAsync } from './open/async.js';
+import { openAsHandle as openAsHandleAsync } from './open-as-handle/async.js';
 import { openDir as openDirAsync, opendir as opendirAsync, openDir as openDirSync, opendir as opendirSync } from './open-dir/async.js';
 import { outputFile as outputFileAsync } from './output-file/async.js';
 import { outputJSON as outputJSONAsync, outputJson as outputJsonAsync } from './output-json/async.js';
@@ -264,6 +265,7 @@ export {
 	openAsync,
 	openSync,
 	openAsBlobAsync,
+	openAsHandleAsync,
 	openDirAsync,
 	openDirSync,
 	opendirAsync,
@@ -434,6 +436,7 @@ export default {
 	openAsync,
 	openSync,
 	openAsBlobAsync,
+	openAsHandleAsync,
 	openDirAsync,
 	openDirSync,
 	opendirAsync,
