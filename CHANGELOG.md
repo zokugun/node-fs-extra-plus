@@ -1,5 +1,8 @@
 # Changelog
 
+## v0.3.1 | 2026-02-13
+- use latest `tsc-leda` to correctly generate types
+
 ## v0.3.0 | 2026-02-13
 - rename existing async `open` as `openAsHandle`
 - add new async `open` that returns a file descriptor
