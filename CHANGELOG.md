@@ -1,5 +1,8 @@
 # Changelog
 
+## v0.2.0 | 2026-02-13
+- add `createReadStream` and `createWriteStream` functions
+
 ## v0.1.1 | 2026-02-12
 - update dev dependencies to have no known vulnerabilities
 
