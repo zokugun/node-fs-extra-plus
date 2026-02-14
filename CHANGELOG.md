@@ -1,5 +1,8 @@
 # Changelog
 
+## v0.3.3 | 2026-02-15
+- add default output to the `createFile` function. Used only when the file doesn't exist.
+
 ## v0.3.2 | 2026-02-13
 - correctly import async functions in the async module
 
