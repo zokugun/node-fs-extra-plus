@@ -4,7 +4,7 @@ import { stat, writeFile } from '../fs/sync.js';
 import { mkdirs } from '../make-dir/sync.js';
 import { type FsVoidResult } from '../types/fs-void-result.js';
 
-export function createFile(file: string): FsVoidResult {
+export function createFile(file: string, output: string = ''): FsVoidResult {
 	const fileStats = stat(file);
 	if(!fileStats.fails && fileStats.value.isFile()) {
 		return OK;
@@ -25,7 +25,7 @@ export function createFile(file: string): FsVoidResult {
 		}
 	}
 
-	return writeFile(file, '');
+	return writeFile(file, output, 'utf8');
 }
 
 export const ensureFile = createFile;

@@ -39,6 +39,18 @@ describe('> when file does not exist', () => {
 
 		expect(fs.existsSync(file)).to.be.true;
 	});
+
+	it('should create the JSON file', () => {
+		const file = path.join(TEST_DIR, 'dir/that/does/not/exist', 'file.json');
+
+		expect(fs.existsSync(file)).to.be.false;
+
+		const result = fse.ensureFileSync(file, '{}');
+		expect(result.fails).to.be.false;
+
+		expect(fs.existsSync(file)).to.be.true;
+		expect(fs.readFileSync(file, 'utf8')).to.equals('{}');
+	});
 });
 
 describe('> when there is a directory at that path', () => {
