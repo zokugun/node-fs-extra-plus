@@ -1,5 +1,8 @@
 # Changelog
 
+## v0.3.4 | 2026-03-01
+- update dependencies
+
 ## v0.3.3 | 2026-02-15
 - add default output to the `createFile` function. Used only when the file doesn't exist.
 
