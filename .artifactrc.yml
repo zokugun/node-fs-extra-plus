@@ -1,6 +1,6 @@
 artifacts:
   "@daiyam/artifact-lang-ts":
-    version: 0.6.3
+    version: 0.6.4
   "@daiyam/artifact-npm":
     version: 0.6.2
   "@daiyam/artifact-npm-ts":
@@ -10,10 +10,10 @@ artifacts:
   "@daiyam/artifact-npm-zokugun":
     version: 0.2.2
   "@daiyam/artifact-test-vitest-ts":
-    version: 0.2.4
+    version: 0.3.0
   "@daiyam/artifact-gh-issuehub":
-    version: 0.2.2
+    version: 0.2.3
   "@daiyam/artifact-lang-js":
-    version: 0.9.3
+    version: 0.9.5
     requires:
       - "24"
