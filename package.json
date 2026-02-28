@@ -72,8 +72,8 @@
 		"watch:test": "tsc-watch -p test"
 	},
 	"dependencies": {
-		"@zokugun/is-it-type": "^0.5.2",
-		"@zokugun/xtry": "^0.10.1"
+		"@zokugun/is-it-type": "^0.7.0",
+		"@zokugun/xtry": "^0.11.0"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^19.7.1",

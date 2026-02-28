@@ -1,11 +1,11 @@
 import type * as fs from 'node:fs';
 import path from 'node:path';
 import { isNodeError } from '@zokugun/is-it-type';
-import type { SyncResult } from '@zokugun/xtry/sync';
+import type { SyncFunctionResult } from '@zokugun/xtry/sync';
 import { expect, expectTypeOf, it } from 'vitest';
 import fse from '../../src/sync.js';
 
-type FsResult<Fn extends (...args: any[]) => unknown> = SyncResult<Fn, NodeJS.ErrnoException>;
+type FsResult<Fn extends (...args: any[]) => unknown> = SyncFunctionResult<Fn, NodeJS.ErrnoException>;
 type Wrapped<Fn extends (...args: any[]) => unknown> = (...args: Parameters<Fn>) => FsResult<Fn>;
 type ReaddirStrings = (path: fs.PathLike, options?: {
 	encoding: BufferEncoding | null;
