@@ -84,7 +84,7 @@
 		"@types/node": "^24.1.0",
 		"@vitest/coverage-v8": "^4.0.18",
 		"@vitest/ui": "^4.0.18",
-		"@zokugun/tsc-leda": "^0.2.0",
+		"@zokugun/tsc-leda": "^0.3.0",
 		"fixpack": "^4.0.0",
 		"fs-extra": "^11.3.3",
 		"globby": "^16.1.1",
