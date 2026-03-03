@@ -1,5 +1,8 @@
 # Changelog
 
+## v0.3.5 | 2026-03-03
+- fix compatibility for Node.js 18.x
+
 ## v0.3.4 | 2026-03-01
 - update dependencies
 
