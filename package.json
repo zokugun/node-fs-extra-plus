@@ -73,7 +73,7 @@
 	},
 	"dependencies": {
 		"@zokugun/is-it-type": "^0.7.0",
-		"@zokugun/xtry": "^0.11.0"
+		"@zokugun/xtry": "^0.11.1"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^19.7.1",

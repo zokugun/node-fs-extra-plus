@@ -12,5 +12,7 @@ export function isNonEmptyDir(path: PathLike): boolean {
 		return false;
 	}
 
+	void dir.value.closeSync();
+
 	return read.value !== null;
 }

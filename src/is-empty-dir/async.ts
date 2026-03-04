@@ -12,5 +12,7 @@ export async function isEmptyDir(path: PathLike): Promise<boolean> {
 		return false;
 	}
 
+	void await dir.value.close();
+
 	return read.value === null;
 }
