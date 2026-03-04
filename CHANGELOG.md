@@ -1,5 +1,8 @@
 # Changelog
 
+## v0.3.6 | 2026-03-04
+- close `Dir` in the functions `isEmptyDir` and `isNonEmptyDir`
+
 ## v0.3.5 | 2026-03-03
 - fix compatibility for Node.js 18.x
 
