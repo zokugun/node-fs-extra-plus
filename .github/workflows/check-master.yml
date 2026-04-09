@@ -21,7 +21,9 @@ jobs:
 
       - name: Install zizmor
         run: |
-          cargo install --locked zizmor
+          $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+
+          brew install zizmor
 
       - name: Setup Node.js environment
         uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
