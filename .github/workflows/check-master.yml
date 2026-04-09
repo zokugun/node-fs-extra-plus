@@ -1,7 +1,7 @@
-name: Check PR
+name: Check Master
 
 on:
-  pull_request:
+  push:
     branches:
       - master
     paths-ignore:
@@ -48,5 +48,5 @@ jobs:
         run: |
           npx commitlint --from "${BASE_SHA}" --to "${HEAD_SHA}" --verbose
         env:
-          BASE_SHA: ${{ github.event.pull_request.base.sha }}
-          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          BASE_SHA: ${{ github.event.before }}
+          HEAD_SHA: ${{ github.event.head }}
