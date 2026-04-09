@@ -34,7 +34,16 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
 
+      - name: Install dependencies on Node.js-v18
+        if: matrix.node == '18.x'
+        run: |
+          jq --arg version "4.0.18" '(.devDependencies //= {}) | .devDependencies["@vitest/coverage-v8"] = $version | .devDependencies["@vitest/ui"] = $version | .devDependencies["vitest"] = $version' package.json > package.json.tmp
+          mv package.json.tmp package.json
+
+          npm install
+
       - name: Install dependencies
+        if: matrix.node != '18.x'
         run: |
           npm ci
 
