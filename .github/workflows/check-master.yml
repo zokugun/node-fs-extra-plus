@@ -1,7 +1,7 @@
-name: Check PR
+name: Check Mster
 
 on:
-  pull_request:
+  push:
     branches:
       - master
     paths-ignore:
@@ -46,4 +46,4 @@ jobs:
 
       - name: Lint commit
         run: |
-          npx commitlint --from ${{ github.event.pull_request.base.sha }} --to ${{ github.event.pull_request.head.sha }} --verbose
+          npx commitlint --last --verbose
