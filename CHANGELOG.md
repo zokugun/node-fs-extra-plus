@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.3.7 | 2026-04-09
+- use locked dependencies
+- use GitHub Environment to publish
+
 ## v0.3.6 | 2026-03-04
 - close `Dir` in the functions `isEmptyDir` and `isNonEmptyDir`
 
