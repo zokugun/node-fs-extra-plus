@@ -21,6 +21,9 @@ jobs:
       matrix:
         node: [18.x, 20.x, 22.x, 24.x]
         os: [ubuntu-latest, macos-latest, windows-latest]
+    defaults:
+      run:
+        shell: bash
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout code
@@ -34,7 +37,16 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
 
+      - name: Install dependencies on Node.js-v18
+        if: matrix.node == '18.x'
+        run: |
+          jq --arg version "4.0.18" '(.devDependencies //= {}) | .devDependencies["@vitest/coverage-v8"] = $version | .devDependencies["@vitest/ui"] = $version | .devDependencies["vitest"] = $version' package.json > package.json.tmp
+          mv package.json.tmp package.json
+
+          npm install
+
       - name: Install dependencies
+        if: matrix.node != '18.x'
         run: |
           npm ci
 
