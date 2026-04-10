@@ -1,4 +1,4 @@
-name: Stale Issues & PR
+name: Moderation - Stale Issues & PR
 
 on:
   schedule:
