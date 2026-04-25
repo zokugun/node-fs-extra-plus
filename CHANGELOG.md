@@ -1,5 +1,8 @@
 # Changelog
 
+## v0.3.8 | 2026-04-25
+- expose some utility functions (`stringifyJson` and `stripBom`)
+
 ## v0.3.7 | 2026-04-09
 - use locked dependencies
 - use GitHub Environment to publish
