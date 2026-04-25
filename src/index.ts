@@ -154,6 +154,7 @@ import { writeJSON as writeJSONSync, writeJson as writeJsonSync } from './write-
 
 import { createReadStream } from './create-read-stream/index.js';
 import { createWriteStream } from './create-write-stream/index.js';
+import * as utils from './utils/index.js';
 
 /* eslint-disable unicorn/prefer-export-from */
 export {
@@ -314,6 +315,7 @@ export {
 	truncateSync,
 	unlinkAsync,
 	unlinkSync,
+	utils,
 	utimesAsync,
 	utimesSync,
 	walkAsync,
@@ -485,6 +487,7 @@ export default {
 	truncateSync,
 	unlinkAsync,
 	unlinkSync,
+	utils,
 	utimesAsync,
 	utimesSync,
 	walkAsync,

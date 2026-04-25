@@ -83,6 +83,8 @@ import { touch } from './touch/async.js';
 import { walk } from './walk/async.js';
 import { writeJSON, writeJson } from './write-json/async.js';
 
+import * as utils from './utils/index.js';
+
 /* eslint-disable unicorn/prefer-export-from */
 export {
 	type FsResult,
@@ -170,6 +172,7 @@ export {
 	touch,
 	truncate,
 	unlink,
+	utils,
 	utimes,
 	walk,
 	write,
@@ -257,6 +260,7 @@ export default {
 	touch,
 	truncate,
 	unlink,
+	utils,
 	utimes,
 	walk,
 	write,

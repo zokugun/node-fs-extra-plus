@@ -79,6 +79,8 @@ import { touch } from './touch/sync.js';
 import { walk } from './walk/sync.js';
 import { writeJSON, writeJson } from './write-json/sync.js';
 
+import * as utils from './utils/index.js';
+
 /* eslint-disable unicorn/prefer-export-from */
 export {
 	type FsResult,
@@ -162,6 +164,7 @@ export {
 	touch,
 	truncate,
 	unlink,
+	utils,
 	utimes,
 	walk,
 	write,
@@ -247,6 +250,7 @@ export default {
 	touch,
 	truncate,
 	unlink,
+	utils,
 	utimes,
 	walk,
 	write,
