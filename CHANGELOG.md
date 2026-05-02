@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.4.0 | 2026-05-01
+- add `untildify` function
+- move `stringifyJson`, `stripBom` & `isFsError` functions
+- add `stringifyJSON` and `stripBOM` aliases
+
 ## v0.3.8 | 2026-04-25
 - expose some utility functions (`stringifyJson` and `stripBom`)
 
