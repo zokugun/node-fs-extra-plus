@@ -1,12 +1,14 @@
 import { type FsResult } from './fs-result.js';
 import { type FsVoidResult } from './fs-void-result.js';
 import { type ReadStreamOptions, type WriteStreamOptions } from './stream.js';
+import { type StringifyJsonOptions } from './stringify-json.js';
 import type { WalkItem, WalkOptions } from './walk.js';
 
 export const typeExports = {
 	FsResult: undefined as unknown as FsResult<unknown>,
 	FsVoidResult: undefined as unknown as FsVoidResult,
 	ReadStreamOptions: undefined as unknown as ReadStreamOptions,
+	StringifyJsonOptions: undefined as unknown as StringifyJsonOptions,
 	WriteStreamOptions: undefined as unknown as WriteStreamOptions,
 	WalkItem: undefined as unknown as WalkItem,
 	WalkOptions: undefined as unknown as WalkOptions,
@@ -17,6 +19,7 @@ export {
 	type FsResult,
 	type FsVoidResult,
 	type ReadStreamOptions,
+	type StringifyJsonOptions,
 	type WriteStreamOptions,
 	type WalkItem,
 	type WalkOptions,

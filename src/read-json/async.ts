@@ -1,7 +1,7 @@
 import { type PathLike } from 'node:fs';
 import { err, parseJson, type Result } from '@zokugun/xtry/async';
 import { readFile } from '../fs/async.js';
-import { stripBom } from '../utils/strip-bom.js';
+import { stripBom } from '../strip-bom/index.js';
 
 export async function readJson(file: PathLike, options: Parameters<typeof readFile>[1] & { reviver?: Parameters<typeof JSON.parse>[1] } = {}): Promise<Result<unknown, NodeJS.ErrnoException | SyntaxError>> {
 	const result = await readFile(file, options);

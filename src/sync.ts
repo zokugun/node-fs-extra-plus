@@ -1,11 +1,15 @@
 /* eslint-disable import/order,import/no-duplicates */
+import { isFsError } from './is-fs-error/index.js';
+import { stringifyJSON, stringifyJson } from './stringify-json/index.js';
+import { stripBOM, stripBom } from './strip-bom/index.js';
 import { Dir } from './types/dir.js';
 import { typeExports } from './types/exports.js';
 import type { FsResult, FsVoidResult } from './types/exports.js';
 import { FsError } from './types/fs-error.js';
 import { type ReadStreamOptions, type WriteStreamOptions } from './types/stream.js';
+import { type StringifyJsonOptions } from './types/stringify-json.js';
 import { type WalkItem, type WalkOptions } from './types/walk.js';
-import { isFsError } from './utils/is-fs-error.js';
+import { untildify } from './untildify/index.js';
 
 import {
 	access,
@@ -79,13 +83,12 @@ import { touch } from './touch/sync.js';
 import { walk } from './walk/sync.js';
 import { writeJSON, writeJson } from './write-json/sync.js';
 
-import * as utils from './utils/index.js';
-
 /* eslint-disable unicorn/prefer-export-from */
 export {
 	type FsResult,
 	type FsVoidResult,
 	type ReadStreamOptions,
+	type StringifyJsonOptions,
 	type WriteStreamOptions,
 	type WalkItem,
 	type WalkOptions,
@@ -160,11 +163,15 @@ export {
 	rmdir,
 	stat,
 	statfs,
+	stringifyJSON,
+	stringifyJson,
+	stripBOM,
+	stripBom,
 	symlink,
 	touch,
 	truncate,
 	unlink,
-	utils,
+	untildify,
 	utimes,
 	walk,
 	write,
@@ -246,11 +253,15 @@ export default {
 	rmdir,
 	stat,
 	statfs,
+	stringifyJSON,
+	stringifyJson,
+	stripBOM,
+	stripBom,
 	symlink,
 	touch,
 	truncate,
 	unlink,
-	utils,
+	untildify,
 	utimes,
 	walk,
 	write,

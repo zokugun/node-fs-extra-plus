@@ -3,5 +3,11 @@ export function stripBom(content: string | Buffer): string {
 		content = content.toString('utf8');
 	}
 
-	return content.replace(/^\uFEFF/, '');
+	if(content.codePointAt(0) === 0xFE_FF) {
+		return content.slice(1);
+	}
+
+	return content;
 }
+
+export const stripBOM = stripBom;

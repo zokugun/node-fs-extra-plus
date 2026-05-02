@@ -1,7 +1,7 @@
 import { type PathLike } from 'node:fs';
 import { err, parseJson, type Result } from '@zokugun/xtry/sync';
 import { readFile } from '../fs/sync.js';
-import { stripBom } from '../utils/strip-bom.js';
+import { stripBom } from '../strip-bom/index.js';
 
 export function readJson(file: PathLike, options: Parameters<typeof readFile>[1] & { reviver?: Parameters<typeof JSON.parse>[1] } = {}): Result<unknown, NodeJS.ErrnoException | SyntaxError> {
 	const result = readFile(file, options);
