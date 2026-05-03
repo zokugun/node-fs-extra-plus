@@ -201,6 +201,7 @@ export default {
 	chmod,
 	chown,
 	close,
+	copy,
 	copyFile,
 	cp,
 	createFile,

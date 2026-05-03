@@ -56,6 +56,7 @@ import {
 	writev,
 	writeFile,
 } from './fs/sync.js';
+import { copy } from './copy/sync.js';
 import { createFile, ensureFile } from './create-file/sync.js';
 import { createLink, ensureLink } from './create-link/sync.js';
 import { createReadStream } from './create-read-stream/index.js';
@@ -99,6 +100,7 @@ export {
 	chmod,
 	chown,
 	close,
+	copy,
 	copyFile,
 	cp,
 	createFile,
@@ -192,6 +194,7 @@ export default {
 	chmod,
 	chown,
 	close,
+	copy,
 	copyFile,
 	cp,
 	createFile,
