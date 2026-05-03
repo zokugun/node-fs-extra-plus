@@ -3,7 +3,7 @@
 ## v0.4.1 | 2026-05-03
 - add missing `copy` exports
 
-## v0.4.0 | 2026-05-01
+## v0.4.0 | 2026-05-02
 - add `untildify` function
 - move `stringifyJson`, `stripBom` & `isFsError` functions
 - add `stringifyJSON` and `stripBOM` aliases
