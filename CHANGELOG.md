@@ -1,5 +1,8 @@
 # Changelog
 
+## v0.4.1 | 2026-05-03
+- add missing `copy` exports
+
 ## v0.4.0 | 2026-05-01
 - add `untildify` function
 - move `stringifyJson`, `stripBom` & `isFsError` functions
