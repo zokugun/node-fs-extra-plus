@@ -1,7 +1,7 @@
 import path from 'node:path';
 import { OK_UNDEFINED } from '@zokugun/xtry';
+import { mkdirs } from '../ensure-dir/async.js';
 import { readdir } from '../fs/async.js';
-import { mkdirs } from '../make-dir/async.js';
 import { remove } from '../remove/async.js';
 
 export async function emptyDir(dir: string): ReturnType<typeof mkdirs> {

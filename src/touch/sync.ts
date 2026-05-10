@@ -1,7 +1,7 @@
 import path from 'node:path';
 import { OK } from '@zokugun/xtry/sync';
+import { mkdirs } from '../ensure-dir/sync.js';
 import { utimes, open, close } from '../fs/sync.js';
-import { mkdirs } from '../make-dir/sync.js';
 import { type FsVoidResult } from '../types/fs-void-result.js';
 
 export function touch(file: string): FsVoidResult {

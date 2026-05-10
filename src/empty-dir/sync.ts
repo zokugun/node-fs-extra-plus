@@ -1,7 +1,7 @@
 import path from 'node:path';
 import { OK_UNDEFINED } from '@zokugun/xtry';
+import { mkdirs } from '../ensure-dir/sync.js';
 import { readdir } from '../fs/sync.js';
-import { mkdirs } from '../make-dir/sync.js';
 import { remove } from '../remove/sync.js';
 
 export function emptyDir(dir: string): ReturnType<typeof mkdirs> {

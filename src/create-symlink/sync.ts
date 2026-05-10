@@ -1,8 +1,8 @@
 import type fs from 'node:fs';
 import path from 'node:path';
 import { err, ok, OK, type Result } from '@zokugun/xtry';
+import { mkdirs } from '../ensure-dir/sync.js';
 import { stat, lstat, exists, symlink } from '../fs/sync.js';
-import { mkdirs } from '../make-dir/sync.js';
 import { FsError } from '../types/fs-error.js';
 import { type FsResult } from '../types/fs-result.js';
 import { areIdentical } from '../utils/are-identical.js';
@@ -66,7 +66,7 @@ export function symlinkPaths(source: string, target: string): FsResult<{ toCwd: 
 			});
 		}
 		else {
-			return err(new FsError('absolute srcpath does not exist'));
+			return err(new FsError('absolute source does not exist'));
 		}
 	}
 
@@ -97,7 +97,7 @@ export function symlinkPaths(source: string, target: string): FsResult<{ toCwd: 
 		});
 	}
 	else {
-		return err(new FsError('relative srcpath does not exist'));
+		return err(new FsError('relative source does not exist'));
 	}
 }
 

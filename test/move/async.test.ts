@@ -102,7 +102,7 @@ it('should not overwrite the destination by default', async () => {
 
 	const result = await fse.moveAsync(source, destination);
 	expect(result.fails).to.be.true;
-	expect(result.error!.message).to.equals('dest already exists.');
+	expect(result.error!.message).to.equals('destination already exists.');
 });
 
 it('should not overwrite if overwrite = false', async () => {
@@ -114,7 +114,7 @@ it('should not overwrite if overwrite = false', async () => {
 
 	const result = await fse.moveAsync(source, destination, { overwrite: false });
 	expect(result.fails).to.be.true;
-	expect(result.error!.message).to.equals('dest already exists.');
+	expect(result.error!.message).to.equals('destination already exists.');
 });
 
 it('should overwrite file if overwrite = true', async () => {

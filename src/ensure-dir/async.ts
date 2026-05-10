@@ -2,7 +2,7 @@ import { type MakeDirectoryOptions, type Mode, type PathLike } from 'node:fs';
 import { isNullable, isNumber, isPrimitive } from '@zokugun/is-it-type';
 import { mkdir } from '../fs/async.js';
 
-async function makeDir(dir: PathLike, options?: Mode | MakeDirectoryOptions | null): ReturnType<typeof mkdir> {
+export async function ensureDir(dir: PathLike, options?: Mode | MakeDirectoryOptions | null): ReturnType<typeof mkdir> {
 	let mode: number;
 
 	if(isNullable(options)) {
@@ -24,6 +24,5 @@ async function makeDir(dir: PathLike, options?: Mode | MakeDirectoryOptions | nu
 	});
 }
 
-export const mkdirs = makeDir;
-export const mkdirp = makeDir;
-export const ensureDir = makeDir;
+export const mkdirs = ensureDir;
+export const mkdirp = ensureDir;

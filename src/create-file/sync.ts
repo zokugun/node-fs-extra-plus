@@ -1,7 +1,7 @@
 import path from 'node:path';
 import { OK } from '@zokugun/xtry';
+import { mkdirs } from '../ensure-dir/sync.js';
 import { stat, writeFile } from '../fs/sync.js';
-import { mkdirs } from '../make-dir/sync.js';
 import { type FsVoidResult } from '../types/fs-void-result.js';
 
 export function createFile(file: string, output: string = ''): FsVoidResult {

@@ -2,10 +2,10 @@ import type { BigIntStats, Stats } from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
 import { err, OK, OK_TRUE, xdefer, xtry } from '@zokugun/xtry/sync';
+import { mkdirs } from '../ensure-dir/sync.js';
 import * as fs from '../fs/sync.js';
-import { mkdirs } from '../make-dir/sync.js';
+import { isExisting } from '../is-existing/sync.js';
 import { openDir } from '../open-dir/sync.js';
-import { pathExists } from '../path-exists/sync.js';
 import { FsError } from '../types/fs-error.js';
 import { type FsResult } from '../types/fs-result.js';
 import { type FsVoidResult } from '../types/fs-void-result.js';
@@ -40,9 +40,8 @@ export function copy(source: string, destination: string, options?: CopyOptionsI
 	}
 
 	const destinationParent = path.dirname(destination);
-	const dirExists = pathExists(destinationParent);
 
-	if(!dirExists.value) {
+	if(!isExisting(destinationParent)) {
 		const result = mkdirs(destinationParent);
 		if(result.fails) {
 			return result;

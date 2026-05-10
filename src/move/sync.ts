@@ -1,9 +1,9 @@
 import path from 'node:path';
 import { err, OK } from '@zokugun/xtry/sync';
 import { copy } from '../copy/sync.js';
+import { mkdirs } from '../ensure-dir/sync.js';
 import { rename } from '../fs/sync.js';
-import { mkdirs } from '../make-dir/sync.js';
-import { pathExists } from '../path-exists/sync.js';
+import { isExisting } from '../is-existing/sync.js';
 import { remove } from '../remove/sync.js';
 import { FsError } from '../types/fs-error.js';
 import { type FsVoidResult } from '../types/fs-void-result.js';
@@ -49,9 +49,8 @@ export function move(source: string, destination: string, options: MoveOptions =
 			}
 		}
 		else {
-			const xstResult = pathExists(destination);
-			if(xstResult.value) {
-				return err(new FsError('dest already exists.'));
+			if(isExisting(destination)) {
+				return err(new FsError('destination already exists.'));
 			}
 		}
 	}

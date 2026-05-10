@@ -1,7 +1,7 @@
 import path from 'node:path';
 import { OK } from '@zokugun/xtry/async';
+import { mkdirs } from '../ensure-dir/async.js';
 import { close, open, utimes } from '../fs/async.js';
-import { mkdirs } from '../make-dir/async.js';
 import { type FsVoidResult } from '../types/fs-void-result.js';
 
 export async function touch(file: string): Promise<FsVoidResult> {

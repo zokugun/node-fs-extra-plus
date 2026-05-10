@@ -1,7 +1,7 @@
 import path from 'node:path';
 import { OK } from '@zokugun/xtry';
+import { mkdirs } from '../ensure-dir/async.js';
 import { lstat, exists, link } from '../fs/async.js';
-import { mkdirs } from '../make-dir/async.js';
 import { type FsVoidResult } from '../types/fs-void-result.js';
 import { areIdentical } from '../utils/are-identical.js';
 

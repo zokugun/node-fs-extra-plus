@@ -1,9 +1,9 @@
 import path from 'node:path';
 import { err, OK } from '@zokugun/xtry/async';
 import { copy } from '../copy/async.js';
+import { mkdirs } from '../ensure-dir/async.js';
 import { rename } from '../fs/async.js';
-import { mkdirs } from '../make-dir/async.js';
-import { pathExists } from '../path-exists/async.js';
+import { isExisting } from '../is-existing/async.js';
 import { remove } from '../remove/async.js';
 import { FsError } from '../types/fs-error.js';
 import { type FsVoidResult } from '../types/fs-void-result.js';
@@ -49,9 +49,8 @@ export async function move(source: string, destination: string, options: MoveOpt
 			}
 		}
 		else {
-			const xstResult = await pathExists(destination);
-			if(xstResult.value) {
-				return err(new FsError('dest already exists.'));
+			if(await isExisting(destination)) {
+				return err(new FsError('destination already exists.'));
 			}
 		}
 	}

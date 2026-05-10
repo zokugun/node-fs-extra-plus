@@ -1,8 +1,8 @@
 import type fs from 'node:fs';
 import path from 'node:path';
 import { err, ok, OK, type Result } from '@zokugun/xtry';
+import { mkdirs } from '../ensure-dir/async.js';
 import { stat, lstat, exists, symlink } from '../fs/async.js';
-import { mkdirs } from '../make-dir/async.js';
 import { FsError } from '../types/fs-error.js';
 import { type FsResult } from '../types/fs-result.js';
 import { areIdentical } from '../utils/are-identical.js';
@@ -66,7 +66,7 @@ async function symlinkPaths(source: string, target: string): Promise<FsResult<{ 
 			});
 		}
 		else {
-			return err(new FsError('absolute srcpath does not exist'));
+			return err(new FsError('absolute source does not exist'));
 		}
 	}
 
@@ -97,7 +97,7 @@ async function symlinkPaths(source: string, target: string): Promise<FsResult<{ 
 		});
 	}
 	else {
-		return err(new FsError('relative srcpath does not exist'));
+		return err(new FsError('relative source does not exist'));
 	}
 }
 
