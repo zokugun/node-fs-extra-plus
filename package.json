@@ -81,12 +81,12 @@
 		"watch:test": "tsc-watch -p test"
 	},
 	"dependencies": {
-		"@zokugun/is-it-type": "0.7.0",
-		"@zokugun/xtry": "0.11.5"
+		"@zokugun/is-it-type": "0.8.1",
+		"@zokugun/xtry": "0.11.6"
 	},
 	"devDependencies": {
-		"@commitlint/cli": "20.5.2",
-		"@commitlint/config-conventional": "20.5.0",
+		"@commitlint/cli": "20.5.3",
+		"@commitlint/config-conventional": "20.5.3",
 		"@types/fs-extra": "11.0.4",
 		"@types/klaw": "3.0.7",
 		"@types/klaw-sync": "6.0.5",
@@ -112,6 +112,11 @@
 	},
 	"optionalDependencies": {
 		"mime-types": "*"
+	},
+	"overrides": {
+		"ajv": {
+			"fast-uri": "3.1.2"
+		}
 	},
 	"keywords": [
 		"file",
