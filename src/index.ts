@@ -1,5 +1,7 @@
 /* eslint-disable import/order,import/no-duplicates */
 import { isFsError } from './is-fs-error/index.js';
+import { isSafeBasename } from './is-safe-basename/index.js';
+import { isSafePath } from './is-safe-path/index.js';
 import * as mode from './mode/index.js';
 import { stringifyJSON, stringifyJson } from './stringify-json/index.js';
 import { stripBOM, stripBom } from './strip-bom/index.js';
@@ -74,11 +76,14 @@ import { isLink as isLinkAsync } from './is-link/async.js';
 import { isNonEmptyDir as isNonEmptyDirAsync } from './is-non-empty-dir/async.js';
 import { isNonEmptyFile as isNonEmptyFileAsync } from './is-non-empty-file/async.js';
 import { isSymlink as isSymlinkAsync } from './is-symlink/async.js';
+import { makeTempDir as makeTempDirAsync } from './make-temp-dir/async.js';
+import { makeTempFile as makeTempFileAsync } from './make-temp-file/async.js';
 import { move as moveAsync } from './move/async.js';
 import { openAsHandle as openAsHandleAsync } from './open-as-handle/async.js';
 import { openDir as openDirAsync, opendir as opendirAsync, openDir as openDirSync, opendir as opendirSync } from './open-dir/async.js';
 import { outputFile as outputFileAsync } from './output-file/async.js';
 import { outputJSON as outputJSONAsync, outputJson as outputJsonAsync } from './output-json/async.js';
+import { outputTempFile as outputTempFileAsync } from './output-temp-file/async.js';
 import { pathExists as pathExistsAsync } from './path-exists/async.js';
 import { readJSON as readJSONAsync, readJson as readJsonAsync } from './read-json/async.js';
 import { remove as removeAsync } from './remove/async.js';
@@ -146,9 +151,12 @@ import { isLink as isLinkSync } from './is-link/sync.js';
 import { isNonEmptyDir as isNonEmptyDirSync } from './is-non-empty-dir/sync.js';
 import { isNonEmptyFile as isNonEmptyFileSync } from './is-non-empty-file/sync.js';
 import { isSymlink as isSymlinkSync } from './is-symlink/sync.js';
+import { makeTempDir as makeTempDirSync } from './make-temp-dir/sync.js';
+import { makeTempFile as makeTempFileSync } from './make-temp-file/sync.js';
 import { move as moveSync } from './move/sync.js';
 import { outputFile as outputFileSync } from './output-file/sync.js';
 import { outputJSON as outputJSONSync, outputJson as outputJsonSync } from './output-json/sync.js';
+import { outputTempFile as outputTempFileSync } from './output-temp-file/sync.js';
 import { pathExists as pathExistsSync } from './path-exists/sync.js';
 import { readJSON as readJSONSync, readJson as readJsonSync } from './read-json/sync.js';
 import { remove as removeSync } from './remove/sync.js';
@@ -243,6 +251,8 @@ export {
 	isNonEmptyDirSync,
 	isNonEmptyFileAsync,
 	isNonEmptyFileSync,
+	isSafeBasename,
+	isSafePath,
 	isSymlinkAsync,
 	isSymlinkSync,
 	lchmodAsync,
@@ -255,6 +265,10 @@ export {
 	lstatSync,
 	lutimesAsync,
 	lutimesSync,
+	makeTempDirAsync,
+	makeTempDirSync,
+	makeTempFileAsync,
+	makeTempFileSync,
 	mkdirAsync,
 	mkdirSync,
 	mkdirpAsync,
@@ -281,6 +295,8 @@ export {
 	outputJSONSync,
 	outputJsonAsync,
 	outputJsonSync,
+	outputTempFileAsync,
+	outputTempFileSync,
 	pathExistsAsync,
 	pathExistsSync,
 	readAsync,
@@ -419,6 +435,8 @@ export default {
 	isNonEmptyDirSync,
 	isNonEmptyFileAsync,
 	isNonEmptyFileSync,
+	isSafeBasename,
+	isSafePath,
 	isSymlinkAsync,
 	isSymlinkSync,
 	lchmodAsync,
@@ -431,6 +449,10 @@ export default {
 	lstatSync,
 	lutimesAsync,
 	lutimesSync,
+	makeTempDirAsync,
+	makeTempDirSync,
+	makeTempFileAsync,
+	makeTempFileSync,
 	mkdirAsync,
 	mkdirSync,
 	mkdirpAsync,
@@ -457,6 +479,8 @@ export default {
 	outputJSONSync,
 	outputJsonAsync,
 	outputJsonSync,
+	outputTempFileAsync,
+	outputTempFileSync,
 	pathExistsAsync,
 	pathExistsSync,
 	readAsync,

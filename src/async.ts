@@ -74,12 +74,17 @@ import { isFile } from './is-file/async.js';
 import { isLink } from './is-link/async.js';
 import { isNonEmptyDir } from './is-non-empty-dir/async.js';
 import { isNonEmptyFile } from './is-non-empty-file/async.js';
+import { isSafeBasename } from './is-safe-basename/index.js';
+import { isSafePath } from './is-safe-path/index.js';
 import { isSymlink } from './is-symlink/async.js';
+import { makeTempDir } from './make-temp-dir/async.js';
+import { makeTempFile } from './make-temp-file/async.js';
 import { move } from './move/async.js';
 import { openAsHandle } from './open-as-handle/async.js';
 import { openDir, opendir } from './open-dir/async.js';
 import { outputFile } from './output-file/async.js';
 import { outputJSON, outputJson } from './output-json/async.js';
+import { outputTempFile } from './output-temp-file/async.js';
 import { pathExists } from './path-exists/async.js';
 import { readJSON, readJson } from './read-json/async.js';
 import { remove } from './remove/async.js';
@@ -136,12 +141,16 @@ export {
 	isLink,
 	isNonEmptyDir,
 	isNonEmptyFile,
+	isSafeBasename,
+	isSafePath,
 	isSymlink,
 	lchmod,
 	lchown,
 	link,
 	lstat,
 	lutimes,
+	makeTempDir,
+	makeTempFile,
 	mkdir,
 	mkdirp,
 	mkdirs,
@@ -156,6 +165,7 @@ export {
 	outputFile,
 	outputJSON,
 	outputJson,
+	outputTempFile,
 	pathExists,
 	read,
 	readdir,
@@ -231,12 +241,16 @@ export default {
 	isLink,
 	isNonEmptyDir,
 	isNonEmptyFile,
+	isSafeBasename,
+	isSafePath,
 	isSymlink,
 	lchmod,
 	lchown,
 	link,
 	lstat,
 	lutimes,
+	makeTempDir,
+	makeTempFile,
 	mkdir,
 	mkdirp,
 	mkdirs,
@@ -249,6 +263,7 @@ export default {
 	outputFile,
 	outputJSON,
 	outputJson,
+	outputTempFile,
 	pathExists,
 	read,
 	readdir,

@@ -72,11 +72,16 @@ import { isFile } from './is-file/sync.js';
 import { isLink } from './is-link/sync.js';
 import { isNonEmptyDir } from './is-non-empty-dir/sync.js';
 import { isNonEmptyFile } from './is-non-empty-file/sync.js';
+import { isSafeBasename } from './is-safe-basename/index.js';
+import { isSafePath } from './is-safe-path/index.js';
 import { isSymlink } from './is-symlink/sync.js';
+import { makeTempDir } from './make-temp-dir/sync.js';
+import { makeTempFile } from './make-temp-file/sync.js';
 import { move } from './move/sync.js';
 import { openDir, opendir } from './open-dir/sync.js';
 import { outputFile } from './output-file/sync.js';
 import { outputJSON, outputJson } from './output-json/sync.js';
+import { outputTempFile } from './output-temp-file/sync.js';
 import { pathExists } from './path-exists/sync.js';
 import { readJSON, readJson } from './read-json/sync.js';
 import { remove } from './remove/sync.js';
@@ -132,12 +137,16 @@ export {
 	isLink,
 	isNonEmptyDir,
 	isNonEmptyFile,
+	isSafeBasename,
+	isSafePath,
 	isSymlink,
 	lchmod,
 	lchown,
 	link,
 	lstat,
 	lutimes,
+	makeTempDir,
+	makeTempFile,
 	mkdir,
 	mkdirp,
 	mkdirs,
@@ -150,6 +159,7 @@ export {
 	outputFile,
 	outputJSON,
 	outputJson,
+	outputTempFile,
 	pathExists,
 	read,
 	readdir,
@@ -224,12 +234,16 @@ export default {
 	isLink,
 	isNonEmptyDir,
 	isNonEmptyFile,
+	isSafeBasename,
+	isSafePath,
 	isSymlink,
 	lchmod,
 	lchown,
 	link,
 	lstat,
 	lutimes,
+	makeTempDir,
+	makeTempFile,
 	mkdir,
 	mkdirp,
 	mkdirs,
@@ -241,6 +255,7 @@ export default {
 	outputFile,
 	outputJSON,
 	outputJson,
+	outputTempFile,
 	pathExists,
 	read,
 	readdir,
