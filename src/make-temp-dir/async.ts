@@ -3,7 +3,7 @@ import { isString } from '@zokugun/is-it-type';
 import { err, ok, xdefer, type XDeferAsync } from '@zokugun/xtry/async';
 import { mkdirs } from '../ensure-dir/async.js';
 import { mkdtemp, rm } from '../fs/async.js';
-import { isSafeBasename } from '../is-safe-basename/index.js';
+import { isSafeSegment } from '../is-safe-segment/index.js';
 import { FsError } from '../types/fs-error.js';
 import { type FsResult } from '../types/fs-result.js';
 import { getTempDirAsync } from '../utils/get-temp-dir.js';
@@ -13,11 +13,11 @@ export async function makeTempDir(options: MakeTempDirOptions & { defer: true })
 export async function makeTempDir(options?: MakeTempDirOptions & { defer?: false }): Promise<FsResult<string>>;
 export async function makeTempDir(options?: MakeTempDirOptions): Promise<FsResult<string | { path: string; remove: XDeferAsync<FsError | NodeJS.ErrnoException> }>>;
 export async function makeTempDir({ defer = false, parent = '', prefix = '', root }: MakeTempDirOptions = {}): Promise<FsResult<string | { path: string; remove: XDeferAsync<FsError | NodeJS.ErrnoException> }>> {
-	if(parent.length > 0 && !isSafeBasename(parent)) {
+	if(parent.length > 0 && !isSafeSegment(parent)) {
 		return err(new FsError(`Unsafe parent: ${parent}`));
 	}
 
-	if(prefix.length > 0 && !isSafeBasename(prefix)) {
+	if(prefix.length > 0 && !isSafeSegment(prefix)) {
 		return err(new FsError(`Unsafe prefix: ${prefix}`));
 	}
 

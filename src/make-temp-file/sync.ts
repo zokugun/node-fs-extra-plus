@@ -3,7 +3,7 @@ import { isString } from '@zokugun/is-it-type';
 import { err, ok, xdefer, type XDeferSync } from '@zokugun/xtry/sync';
 import { mkdirs } from '../ensure-dir/sync.js';
 import { rm } from '../fs/sync.js';
-import { isSafeBasename } from '../is-safe-basename/index.js';
+import { isSafeSegment } from '../is-safe-segment/index.js';
 import { FsError } from '../types/fs-error.js';
 import { type FsResult } from '../types/fs-result.js';
 import { generateTempName } from '../utils/generate-temp-name.js';
@@ -14,7 +14,7 @@ export function makeTempFile(options: MakeTempFileOptions & { defer: true }): Fs
 export function makeTempFile(options?: MakeTempFileOptions & { defer?: false }): FsResult<string>;
 export function makeTempFile(options?: MakeTempFileOptions): FsResult<string | { path: string; remove: XDeferSync<FsError | NodeJS.ErrnoException> }>;
 export function makeTempFile({ defer = false, extension, name, parent = '', root }: MakeTempFileOptions = {}): FsResult<string | { path: string; remove: XDeferSync<FsError | NodeJS.ErrnoException> }> {
-	if(parent.length > 0 && !isSafeBasename(parent)) {
+	if(parent.length > 0 && !isSafeSegment(parent)) {
 		return err(new FsError(`Unsafe parent: ${parent}`));
 	}
 
@@ -29,13 +29,13 @@ export function makeTempFile({ defer = false, extension, name, parent = '', root
 			return err(new FsError('Cannot use \'extension\' and \'name\' options at the same time'));
 		}
 
-		if(!isSafeBasename(name)) {
+		if(!isSafeSegment(name)) {
 			return err(new FsError(`Unsafe name: ${name}`));
 		}
 	}
 	else {
 		if(isString(extension)) {
-			if(!isSafeBasename(extension)) {
+			if(!isSafeSegment(extension)) {
 				return err(new FsError(`Unsafe extension: ${extension}`));
 			}
 

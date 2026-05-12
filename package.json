@@ -32,6 +32,10 @@
 		"./mode": {
 			"import": "./lib/esm/mode/index.mjs",
 			"require": "./lib/cjs/mode/index.cjs"
+		},
+		"./path": {
+			"import": "./lib/esm/path.mjs",
+			"require": "./lib/cjs/path.cjs"
 		}
 	},
 	"main": "lib/cjs/index.cjs",
@@ -49,6 +53,9 @@
 			],
 			"mode": [
 				"./lib/cjs/mode/index.d.cts"
+			],
+			"path": [
+				"./lib/cjs/path.d.cts"
 			]
 		}
 	},

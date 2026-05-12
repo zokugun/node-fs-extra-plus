@@ -1,5 +1,14 @@
 /* eslint-disable import/order,import/no-duplicates */
+import { absolute } from './absolute/index.js';
+import { createReadStream } from './create-read-stream/index.js';
+import { createWriteStream } from './create-write-stream/index.js';
 import { isFsError } from './is-fs-error/index.js';
+import { isSafePath } from './is-safe-path/index.js';
+import { isSafeSegment } from './is-safe-segment/index.js';
+import { join } from './join/index.js';
+import { parent } from './parent/index.js';
+import { delimiter, extension, isAbsolute, matchesGlob, normalize, relative, segment, separator } from './path/index.js';
+import { resolve } from './resolve/index.js';
 import { stringifyJSON, stringifyJson } from './stringify-json/index.js';
 import { stripBOM, stripBom } from './strip-bom/index.js';
 import { Dir } from './types/dir.js';
@@ -61,9 +70,7 @@ import {
 import { copy } from './copy/async.js';
 import { createFile, ensureFile } from './create-file/async.js';
 import { createLink, ensureLink } from './create-link/async.js';
-import { createReadStream } from './create-read-stream/index.js';
 import { createSymlink, ensureSymlink } from './create-symlink/async.js';
-import { createWriteStream } from './create-write-stream/index.js';
 import { emptyDir, emptydir } from './empty-dir/async.js';
 import { ensureDir, mkdirp, mkdirs } from './ensure-dir/async.js';
 import { isDir } from './is-dir/async.js';
@@ -74,8 +81,6 @@ import { isFile } from './is-file/async.js';
 import { isLink } from './is-link/async.js';
 import { isNonEmptyDir } from './is-non-empty-dir/async.js';
 import { isNonEmptyFile } from './is-non-empty-file/async.js';
-import { isSafeBasename } from './is-safe-basename/index.js';
-import { isSafePath } from './is-safe-path/index.js';
 import { isSymlink } from './is-symlink/async.js';
 import { makeTempDir } from './make-temp-dir/async.js';
 import { makeTempFile } from './make-temp-file/async.js';
@@ -104,6 +109,7 @@ export {
 	Dir,
 	FileHandle,
 	FsError,
+	absolute,
 	access,
 	appendFile,
 	chmod,
@@ -117,6 +123,7 @@ export {
 	createReadStream,
 	createSymlink,
 	createWriteStream,
+	delimiter,
 	emptyDir,
 	emptydir,
 	ensureDir,
@@ -124,6 +131,7 @@ export {
 	ensureLink,
 	ensureSymlink,
 	exists,
+	extension,
 	fchmod,
 	fchown,
 	fdatasync,
@@ -132,6 +140,7 @@ export {
 	ftruncate,
 	futimes,
 	glob,
+	isAbsolute,
 	isDir,
 	isEmptyDir,
 	isEmptyFile,
@@ -141,9 +150,10 @@ export {
 	isLink,
 	isNonEmptyDir,
 	isNonEmptyFile,
-	isSafeBasename,
+	isSafeSegment,
 	isSafePath,
 	isSymlink,
+	join,
 	lchmod,
 	lchown,
 	link,
@@ -151,11 +161,13 @@ export {
 	lutimes,
 	makeTempDir,
 	makeTempFile,
+	matchesGlob,
 	mkdir,
 	mkdirp,
 	mkdirs,
 	mkdtemp,
 	mkdtempDisposable,
+	normalize,
 	move,
 	open,
 	openAsBlob,
@@ -166,6 +178,7 @@ export {
 	outputJSON,
 	outputJson,
 	outputTempFile,
+	parent,
 	pathExists,
 	read,
 	readdir,
@@ -175,10 +188,14 @@ export {
 	readlink,
 	readv,
 	realpath,
+	relative,
 	remove,
 	rename,
+	resolve,
 	rm,
 	rmdir,
+	segment,
+	separator,
 	stat,
 	statfs,
 	stringifyJSON,
@@ -206,6 +223,7 @@ export default {
 	Dir,
 	FileHandle,
 	FsError,
+	absolute,
 	access,
 	appendFile,
 	chmod,
@@ -219,11 +237,13 @@ export default {
 	createReadStream,
 	createSymlink,
 	createWriteStream,
+	delimiter,
 	emptyDir,
 	emptydir,
 	ensureDir,
 	ensureFile,
 	exists,
+	extension,
 	fchmod,
 	fchown,
 	fdatasync,
@@ -232,6 +252,7 @@ export default {
 	ftruncate,
 	futimes,
 	glob,
+	isAbsolute,
 	isDir,
 	isEmptyDir,
 	isEmptyFile,
@@ -241,9 +262,10 @@ export default {
 	isLink,
 	isNonEmptyDir,
 	isNonEmptyFile,
-	isSafeBasename,
+	isSafeSegment,
 	isSafePath,
 	isSymlink,
+	join,
 	lchmod,
 	lchown,
 	link,
@@ -251,11 +273,13 @@ export default {
 	lutimes,
 	makeTempDir,
 	makeTempFile,
+	matchesGlob,
 	mkdir,
 	mkdirp,
 	mkdirs,
 	mkdtemp,
 	mkdtempDisposable,
+	normalize,
 	open,
 	openAsBlob,
 	openAsHandle,
@@ -264,6 +288,7 @@ export default {
 	outputJSON,
 	outputJson,
 	outputTempFile,
+	parent,
 	pathExists,
 	read,
 	readdir,
@@ -273,10 +298,14 @@ export default {
 	readlink,
 	readv,
 	realpath,
+	relative,
 	remove,
 	rename,
+	resolve,
 	rm,
 	rmdir,
+	segment,
+	separator,
 	stat,
 	statfs,
 	stringifyJSON,

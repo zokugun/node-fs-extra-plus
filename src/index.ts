@@ -1,8 +1,15 @@
 /* eslint-disable import/order,import/no-duplicates */
+import { absolute } from './absolute/index.js';
+import { createReadStream } from './create-read-stream/index.js';
+import { createWriteStream } from './create-write-stream/index.js';
 import { isFsError } from './is-fs-error/index.js';
-import { isSafeBasename } from './is-safe-basename/index.js';
 import { isSafePath } from './is-safe-path/index.js';
+import { isSafeSegment } from './is-safe-segment/index.js';
+import { join } from './join/index.js';
 import * as mode from './mode/index.js';
+import { parent } from './parent/index.js';
+import { delimiter, extension, isAbsolute, matchesGlob, normalize, relative, segment, separator } from './path/index.js';
+import { resolve } from './resolve/index.js';
 import { stringifyJSON, stringifyJson } from './stringify-json/index.js';
 import { stripBOM, stripBom } from './strip-bom/index.js';
 import { Dir } from './types/dir.js';
@@ -164,9 +171,6 @@ import { touch as touchSync } from './touch/sync.js';
 import { walk as walkSync } from './walk/sync.js';
 import { writeJSON as writeJSONSync, writeJson as writeJsonSync } from './write-json/sync.js';
 
-import { createReadStream } from './create-read-stream/index.js';
-import { createWriteStream } from './create-write-stream/index.js';
-
 /* eslint-disable unicorn/prefer-export-from */
 export {
 	type FsResult,
@@ -180,6 +184,7 @@ export {
 	FileHandle,
 	FsError,
 	mode,
+	absolute,
 	accessAsync,
 	accessSync,
 	appendFileAsync,
@@ -204,6 +209,7 @@ export {
 	createSymlinkAsync,
 	createSymlinkSync,
 	createWriteStream,
+	delimiter,
 	emptyDirAsync,
 	emptyDirSync,
 	emptydirAsync,
@@ -218,6 +224,7 @@ export {
 	ensureSymlinkSync,
 	existsAsync,
 	existsSync,
+	extension,
 	fchmodAsync,
 	fchmodSync,
 	fchownAsync,
@@ -234,6 +241,7 @@ export {
 	futimesSync,
 	globAsync,
 	globSync,
+	isAbsolute,
 	isDirAsync,
 	isDirSync,
 	isEmptyDirAsync,
@@ -251,10 +259,11 @@ export {
 	isNonEmptyDirSync,
 	isNonEmptyFileAsync,
 	isNonEmptyFileSync,
-	isSafeBasename,
+	isSafeSegment,
 	isSafePath,
 	isSymlinkAsync,
 	isSymlinkSync,
+	join,
 	lchmodAsync,
 	lchmodSync,
 	lchownAsync,
@@ -269,6 +278,7 @@ export {
 	makeTempDirSync,
 	makeTempFileAsync,
 	makeTempFileSync,
+	matchesGlob,
 	mkdirAsync,
 	mkdirSync,
 	mkdirpAsync,
@@ -281,6 +291,7 @@ export {
 	mkdtempDisposableSync,
 	moveAsync,
 	moveSync,
+	normalize,
 	openAsync,
 	openSync,
 	openAsBlobAsync,
@@ -297,6 +308,7 @@ export {
 	outputJsonSync,
 	outputTempFileAsync,
 	outputTempFileSync,
+	parent,
 	pathExistsAsync,
 	pathExistsSync,
 	readAsync,
@@ -315,14 +327,18 @@ export {
 	readvSync,
 	realpathAsync,
 	realpathSync,
+	relative,
 	removeAsync,
 	removeSync,
 	renameAsync,
 	renameSync,
+	resolve,
 	rmAsync,
 	rmSync,
 	rmdirAsync,
 	rmdirSync,
+	segment,
+	separator,
 	statAsync,
 	statSync,
 	statfsAsync,
@@ -364,6 +380,7 @@ export default {
 	FileHandle,
 	FsError,
 	mode,
+	absolute,
 	accessAsync,
 	accessSync,
 	appendFileAsync,
@@ -388,6 +405,7 @@ export default {
 	createSymlinkAsync,
 	createSymlinkSync,
 	createWriteStream,
+	delimiter,
 	emptyDirAsync,
 	emptyDirSync,
 	emptydirAsync,
@@ -402,6 +420,7 @@ export default {
 	ensureSymlinkSync,
 	existsAsync,
 	existsSync,
+	extension,
 	fchmodAsync,
 	fchmodSync,
 	fchownAsync,
@@ -418,6 +437,7 @@ export default {
 	futimesSync,
 	globAsync,
 	globSync,
+	isAbsolute,
 	isDirAsync,
 	isDirSync,
 	isEmptyDirAsync,
@@ -435,10 +455,11 @@ export default {
 	isNonEmptyDirSync,
 	isNonEmptyFileAsync,
 	isNonEmptyFileSync,
-	isSafeBasename,
+	isSafeSegment,
 	isSafePath,
 	isSymlinkAsync,
 	isSymlinkSync,
+	join,
 	lchmodAsync,
 	lchmodSync,
 	lchownAsync,
@@ -453,6 +474,7 @@ export default {
 	makeTempDirSync,
 	makeTempFileAsync,
 	makeTempFileSync,
+	matchesGlob,
 	mkdirAsync,
 	mkdirSync,
 	mkdirpAsync,
@@ -465,6 +487,7 @@ export default {
 	mkdtempDisposableSync,
 	moveAsync,
 	moveSync,
+	normalize,
 	openAsync,
 	openSync,
 	openAsBlobAsync,
@@ -481,6 +504,7 @@ export default {
 	outputJsonSync,
 	outputTempFileAsync,
 	outputTempFileSync,
+	parent,
 	pathExistsAsync,
 	pathExistsSync,
 	readAsync,
@@ -499,14 +523,18 @@ export default {
 	readvSync,
 	realpathAsync,
 	realpathSync,
+	relative,
 	removeAsync,
 	removeSync,
 	renameAsync,
 	renameSync,
+	resolve,
 	rmAsync,
 	rmSync,
 	rmdirAsync,
 	rmdirSync,
+	segment,
+	separator,
 	statAsync,
 	statSync,
 	statfsAsync,

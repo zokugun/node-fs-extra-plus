@@ -3,6 +3,7 @@ entry:
   async: async.ts
   sync: sync.ts
   mode: mode/index.ts
+  path: path.ts
 format:
   - esm
   - cjs

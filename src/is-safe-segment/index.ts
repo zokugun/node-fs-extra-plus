@@ -1,4 +1,4 @@
-export function isSafeBasename(name: string): boolean {
+export function isSafeSegment(name: string): boolean {
 	const trimmed = name.trim();
 
 	return trimmed.length > 0

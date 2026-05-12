@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-control-regex
-const RESERVED_REGEX = /[\\/:*?"<>|\u0000-\u001F\u0080-\u009F]|[. ]$/;
+const ILLEGAL_REGEX = /[\\/:*?"<>|\u0000-\u001F\u0080-\u009F]|[. ]$/;
 const WINDOWS_RESERVED_REGEX = /^(?:con|prn|aux|nul|com\d|lpt\d)(?:\..*)?$/i;
 
 export function isSafePath(path: string): boolean {
@@ -9,7 +9,7 @@ export function isSafePath(path: string): boolean {
 		return false;
 	}
 
-	if(RESERVED_REGEX.test(path) || WINDOWS_RESERVED_REGEX.test(path)) {
+	if(ILLEGAL_REGEX.test(path) || WINDOWS_RESERVED_REGEX.test(path)) {
 		return false;
 	}
 
