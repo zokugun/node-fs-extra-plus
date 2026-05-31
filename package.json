@@ -88,13 +88,13 @@
 		"watch:test": "tsc-watch -p test"
 	},
 	"dependencies": {
+		"@zokugun/fs-path": "0.2.0",
 		"@zokugun/is-it-type": "0.8.1",
 		"@zokugun/xtry": "0.11.6"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "20.5.3",
 		"@commitlint/config-conventional": "20.5.3",
-		"@types/fs-extra": "11.0.4",
 		"@types/klaw": "3.0.7",
 		"@types/klaw-sync": "6.0.5",
 		"@types/node": "24.12.2",
@@ -103,7 +103,6 @@
 		"@zokugun/fs-extra-plus": "0.4.1",
 		"@zokugun/tsc-leda": "0.4.2",
 		"fixpack": "4.0.0",
-		"fs-extra": "11.3.4",
 		"globby": "16.2.0",
 		"husky": "9.1.7",
 		"klaw": "4.1.0",

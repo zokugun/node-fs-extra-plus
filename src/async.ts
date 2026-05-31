@@ -1,14 +1,29 @@
 /* eslint-disable import/order,import/no-duplicates */
-import { absolute } from './absolute/index.js';
+import {
+	type PlatformPath,
+	absolute,
+	delimiter,
+	isAbsolute,
+	join,
+	leafExt,
+	leafName,
+	matchesGlob,
+	normalize,
+	isInDir,
+	isInDirs,
+	isSafePath,
+	isSafeSegment,
+	parentName,
+	parentPath,
+	relative,
+	resolve,
+	sanitize,
+	separator,
+	untildify,
+} from '@zokugun/fs-path';
 import { createReadStream } from './create-read-stream/index.js';
 import { createWriteStream } from './create-write-stream/index.js';
 import { isFsError } from './is-fs-error/index.js';
-import { isSafePath } from './is-safe-path/index.js';
-import { isSafeSegment } from './is-safe-segment/index.js';
-import { join } from './join/index.js';
-import { parent } from './parent/index.js';
-import { delimiter, extension, isAbsolute, matchesGlob, normalize, relative, segment, separator } from './path/index.js';
-import { resolve } from './resolve/index.js';
 import { stringifyJSON, stringifyJson } from './stringify-json/index.js';
 import { stripBOM, stripBom } from './strip-bom/index.js';
 import { Dir } from './types/dir.js';
@@ -19,7 +34,6 @@ import { FsError } from './types/fs-error.js';
 import { type ReadStreamOptions, type WriteStreamOptions } from './types/stream.js';
 import { type StringifyJsonOptions } from './types/stringify-json.js';
 import { type WalkItem, type WalkOptions } from './types/walk.js';
-import { untildify } from './untildify/index.js';
 
 import {
 	access,
@@ -101,6 +115,7 @@ import { writeJSON, writeJson } from './write-json/async.js';
 export {
 	type FsResult,
 	type FsVoidResult,
+	type PlatformPath,
 	type ReadStreamOptions,
 	type StringifyJsonOptions,
 	type WriteStreamOptions,
@@ -131,7 +146,6 @@ export {
 	ensureLink,
 	ensureSymlink,
 	exists,
-	extension,
 	fchmod,
 	fchown,
 	fdatasync,
@@ -147,6 +161,8 @@ export {
 	isExisting,
 	isFile,
 	isFsError,
+	isInDir,
+	isInDirs,
 	isLink,
 	isNonEmptyDir,
 	isNonEmptyFile,
@@ -156,6 +172,8 @@ export {
 	join,
 	lchmod,
 	lchown,
+	leafExt,
+	leafName,
 	link,
 	lstat,
 	lutimes,
@@ -178,7 +196,8 @@ export {
 	outputJSON,
 	outputJson,
 	outputTempFile,
-	parent,
+	parentName,
+	parentPath,
 	pathExists,
 	read,
 	readdir,
@@ -194,7 +213,7 @@ export {
 	resolve,
 	rm,
 	rmdir,
-	segment,
+	sanitize,
 	separator,
 	stat,
 	statfs,
@@ -217,8 +236,8 @@ export {
 };
 /* eslint-enable unicorn/prefer-export-from */
 
-// eslint-disable-next-line import/no-anonymous-default-export
-export default {
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports
+const defaultExport: Omit<typeof import('./async.js'), 'default'> = {
 	...typeExports,
 	Dir,
 	FileHandle,
@@ -242,8 +261,9 @@ export default {
 	emptydir,
 	ensureDir,
 	ensureFile,
+	ensureLink,
+	ensureSymlink,
 	exists,
-	extension,
 	fchmod,
 	fchown,
 	fdatasync,
@@ -259,6 +279,8 @@ export default {
 	isExisting,
 	isFile,
 	isFsError,
+	isInDir,
+	isInDirs,
 	isLink,
 	isNonEmptyDir,
 	isNonEmptyFile,
@@ -268,6 +290,8 @@ export default {
 	join,
 	lchmod,
 	lchown,
+	leafExt,
+	leafName,
 	link,
 	lstat,
 	lutimes,
@@ -279,16 +303,19 @@ export default {
 	mkdirs,
 	mkdtemp,
 	mkdtempDisposable,
+	move,
 	normalize,
 	open,
 	openAsBlob,
 	openAsHandle,
+	openDir,
 	opendir,
 	outputFile,
 	outputJSON,
 	outputJson,
 	outputTempFile,
-	parent,
+	parentName,
+	parentPath,
 	pathExists,
 	read,
 	readdir,
@@ -304,7 +331,7 @@ export default {
 	resolve,
 	rm,
 	rmdir,
-	segment,
+	sanitize,
 	separator,
 	stat,
 	statfs,
@@ -325,3 +352,5 @@ export default {
 	writeJSON,
 	writeJson,
 };
+
+export default defaultExport;

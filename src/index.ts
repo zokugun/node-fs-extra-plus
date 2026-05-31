@@ -1,15 +1,30 @@
 /* eslint-disable import/order,import/no-duplicates */
-import { absolute } from './absolute/index.js';
+import {
+	type PlatformPath,
+	absolute,
+	delimiter,
+	isAbsolute,
+	join,
+	leafExt,
+	leafName,
+	matchesGlob,
+	normalize,
+	isInDir,
+	isInDirs,
+	isSafePath,
+	isSafeSegment,
+	parentName,
+	parentPath,
+	relative,
+	resolve,
+	sanitize,
+	separator,
+	untildify,
+} from '@zokugun/fs-path';
 import { createReadStream } from './create-read-stream/index.js';
 import { createWriteStream } from './create-write-stream/index.js';
 import { isFsError } from './is-fs-error/index.js';
-import { isSafePath } from './is-safe-path/index.js';
-import { isSafeSegment } from './is-safe-segment/index.js';
-import { join } from './join/index.js';
 import * as mode from './mode/index.js';
-import { parent } from './parent/index.js';
-import { delimiter, extension, isAbsolute, matchesGlob, normalize, relative, segment, separator } from './path/index.js';
-import { resolve } from './resolve/index.js';
 import { stringifyJSON, stringifyJson } from './stringify-json/index.js';
 import { stripBOM, stripBom } from './strip-bom/index.js';
 import { Dir } from './types/dir.js';
@@ -20,7 +35,6 @@ import { FsError } from './types/fs-error.js';
 import { type ReadStreamOptions, type WriteStreamOptions } from './types/stream.js';
 import { type StringifyJsonOptions } from './types/stringify-json.js';
 import { type WalkItem, type WalkOptions } from './types/walk.js';
-import { untildify } from './untildify/index.js';
 
 import {
 	access as accessAsync,
@@ -175,6 +189,7 @@ import { writeJSON as writeJSONSync, writeJson as writeJsonSync } from './write-
 export {
 	type FsResult,
 	type FsVoidResult,
+	type PlatformPath,
 	type ReadStreamOptions,
 	type StringifyJsonOptions,
 	type WriteStreamOptions,
@@ -224,7 +239,6 @@ export {
 	ensureSymlinkSync,
 	existsAsync,
 	existsSync,
-	extension,
 	fchmodAsync,
 	fchmodSync,
 	fchownAsync,
@@ -253,6 +267,8 @@ export {
 	isFileAsync,
 	isFileSync,
 	isFsError,
+	isInDir,
+	isInDirs,
 	isLinkAsync,
 	isLinkSync,
 	isNonEmptyDirAsync,
@@ -268,6 +284,8 @@ export {
 	lchmodSync,
 	lchownAsync,
 	lchownSync,
+	leafExt,
+	leafName,
 	linkAsync,
 	linkSync,
 	lstatAsync,
@@ -308,7 +326,8 @@ export {
 	outputJsonSync,
 	outputTempFileAsync,
 	outputTempFileSync,
-	parent,
+	parentName,
+	parentPath,
 	pathExistsAsync,
 	pathExistsSync,
 	readAsync,
@@ -337,7 +356,7 @@ export {
 	rmSync,
 	rmdirAsync,
 	rmdirSync,
-	segment,
+	sanitize,
 	separator,
 	statAsync,
 	statSync,
@@ -373,8 +392,8 @@ export {
 };
 /* eslint-enable unicorn/prefer-export-from */
 
-// eslint-disable-next-line import/no-anonymous-default-export
-export default {
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports
+const defaultExport: Omit<typeof import('./index.js'), 'default'> = {
 	...typeExports,
 	Dir,
 	FileHandle,
@@ -420,7 +439,6 @@ export default {
 	ensureSymlinkSync,
 	existsAsync,
 	existsSync,
-	extension,
 	fchmodAsync,
 	fchmodSync,
 	fchownAsync,
@@ -449,6 +467,8 @@ export default {
 	isFileAsync,
 	isFileSync,
 	isFsError,
+	isInDir,
+	isInDirs,
 	isLinkAsync,
 	isLinkSync,
 	isNonEmptyDirAsync,
@@ -464,6 +484,8 @@ export default {
 	lchmodSync,
 	lchownAsync,
 	lchownSync,
+	leafExt,
+	leafName,
 	linkAsync,
 	linkSync,
 	lstatAsync,
@@ -504,7 +526,8 @@ export default {
 	outputJsonSync,
 	outputTempFileAsync,
 	outputTempFileSync,
-	parent,
+	parentName,
+	parentPath,
 	pathExistsAsync,
 	pathExistsSync,
 	readAsync,
@@ -533,7 +556,7 @@ export default {
 	rmSync,
 	rmdirAsync,
 	rmdirSync,
-	segment,
+	sanitize,
 	separator,
 	statAsync,
 	statSync,
@@ -567,3 +590,5 @@ export default {
 	writeJsonAsync,
 	writeJsonSync,
 };
+
+export default defaultExport;

@@ -1,9 +1,9 @@
 import path from 'node:path';
+import { isSafeSegment } from '@zokugun/fs-path';
 import { isString } from '@zokugun/is-it-type';
 import { err, ok, xdefer, type XDeferAsync } from '@zokugun/xtry/async';
 import { mkdirs } from '../ensure-dir/async.js';
 import { mkdtemp, rm } from '../fs/async.js';
-import { isSafeSegment } from '../is-safe-segment/index.js';
 import { FsError } from '../types/fs-error.js';
 import { type FsResult } from '../types/fs-result.js';
 import { getTempDirAsync } from '../utils/get-temp-dir.js';
