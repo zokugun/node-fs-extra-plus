@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.5.0 | 2026-05-31
+- add `makeTempDir`, `makeTempFile` and `outputTempFile` functions
+- add `collect` option to `walk` function
+- expose `@zokugun/fs-path` through dedicated `path` entry and others entries (minus `posix` and `win32`)
+
 ## v0.4.1 | 2026-05-03
 - add missing `copy` exports
 
