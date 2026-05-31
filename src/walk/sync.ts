@@ -6,9 +6,12 @@ import { FsError } from '../types/fs-error.js';
 import { type WalkItem, type WalkOptions } from '../types/walk.js';
 import { toPathString } from '../utils/to-path-string.js';
 
-export function walk(dir: PathLike, options: WalkOptions = {}): Result<Generator<Result<WalkItem, NodeJS.ErrnoException>>, NodeJS.ErrnoException | FsError> {
+export function walk(dir: PathLike, options: WalkOptions & { collect: true }): Result<WalkItem[], NodeJS.ErrnoException | FsError>;
+export function walk(dir: PathLike, options?: WalkOptions): Result<Generator<Result<WalkItem, NodeJS.ErrnoException>>, NodeJS.ErrnoException | FsError>;
+export function walk(dir: PathLike, options: WalkOptions = {}): Result<Generator<Result<WalkItem, NodeJS.ErrnoException>> | WalkItem[], NodeJS.ErrnoException | FsError> {
 	const {
 		absolute = false,
+		collect = false,
 		depthLimit = -1,
 		filter = () => true,
 		markDirectories = false,
@@ -96,5 +99,21 @@ export function walk(dir: PathLike, options: WalkOptions = {}): Result<Generator
 		}
 	}
 
-	return ok(walkPath(basePath, rootItem, 0, false));
+	const generator = walkPath(basePath, rootItem, 0, false);
+
+	if(collect) {
+		const items: WalkItem[] = [];
+
+		for(const result of generator) {
+			if(result.fails) {
+				return err(result.error);
+			}
+
+			items.push(result.value);
+		}
+
+		return ok(items);
+	}
+
+	return ok(generator);
 }

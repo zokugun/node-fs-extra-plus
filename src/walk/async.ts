@@ -6,9 +6,12 @@ import { FsError } from '../types/fs-error.js';
 import { type WalkItem, type WalkOptions } from '../types/walk.js';
 import { toPathString } from '../utils/to-path-string.js';
 
-export async function walk(dir: PathLike, options: WalkOptions = {}): Promise<Result<AsyncGenerator<Result<WalkItem, NodeJS.ErrnoException>>, NodeJS.ErrnoException | FsError>> {
+export async function walk(dir: PathLike, options: WalkOptions & { collect: true }): Promise<Result<WalkItem[], NodeJS.ErrnoException | FsError>>;
+export async function walk(dir: PathLike, options?: WalkOptions): Promise<Result<AsyncGenerator<Result<WalkItem, NodeJS.ErrnoException>>, NodeJS.ErrnoException | FsError>>;
+export async function walk(dir: PathLike, options: WalkOptions = {}): Promise<Result<AsyncGenerator<Result<WalkItem, NodeJS.ErrnoException>> | WalkItem[], NodeJS.ErrnoException | FsError>> {
 	const {
 		absolute = false,
+		collect = false,
 		depthLimit = -1,
 		filter = () => true,
 		markDirectories = false,
@@ -96,5 +99,21 @@ export async function walk(dir: PathLike, options: WalkOptions = {}): Promise<Re
 		}
 	}
 
-	return ok(walkPath(basePath, rootItem, 0, false));
+	const generator = walkPath(basePath, rootItem, 0, false);
+
+	if(collect) {
+		const items: WalkItem[] = [];
+
+		for await (const result of generator) {
+			if(result.fails) {
+				return err(result.error);
+			}
+
+			items.push(result.value);
+		}
+
+		return ok(items);
+	}
+
+	return ok(generator);
 }

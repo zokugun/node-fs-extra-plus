@@ -7,6 +7,7 @@ export type WalkItem = {
 
 export type WalkOptions = {
 	absolute?: boolean;
+	collect?: boolean;
 	depthLimit?: number;
 	filter?: (item: WalkItem, index: number) => boolean;
 	markDirectories?: boolean;

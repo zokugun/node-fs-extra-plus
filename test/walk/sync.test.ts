@@ -509,3 +509,31 @@ describe('symlinks', () => {
 		testSymlinks(true, ['a', path.join('a', 'b'), path.join('a', 'b', 'c'), path.join('a', 'b', 'c', 'd.txt'), path.join('a', 'e.jpg'), 'h', 't.txt']);
 	});
 });
+
+describe('collect', () => {
+	it('should return all items of a dir containing path and stats object', () => {
+		const paths = [
+			{ path: DIR_NAMES[0], stats: fs.statSync(DIR_PATHS[0]) },
+			{ path: FILE_NAMES[0], stats: fs.statSync(FILE_PATHS[0]) },
+			{ path: DIR_NAMES[1], stats: fs.statSync(DIR_PATHS[1]) },
+			{ path: DIR_NAMES[2], stats: fs.statSync(DIR_PATHS[2]) },
+			{ path: DIR_NAMES[3], stats: fs.statSync(DIR_PATHS[3]) },
+			{ path: FILE_NAMES[1], stats: fs.statSync(FILE_PATHS[1]) },
+			{ path: FILE_NAMES[2], stats: fs.statSync(FILE_PATHS[2]) },
+		];
+
+		const result = fse.walkSync(TEST_DIR, { collect: true });
+		expect(result.fails).to.be.false;
+
+		let index = 0;
+
+		for(const item of result.value!) {
+			expect(item.path).to.equals(paths[index].path);
+			expect(item.stats).to.eql(paths[index].stats);
+
+			index += 1;
+		}
+
+		expect(index).to.be.greaterThan(0);
+	});
+});
