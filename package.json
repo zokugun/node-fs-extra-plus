@@ -127,6 +127,10 @@
 			"undici": "7.28.0"
 		}
 	},
+	"allowScripts": {
+		"@zokugun/cli-utils": true,
+		"fsevents": true
+	},
 	"keywords": [
 		"file",
 		"fs",
