@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.6.0 | 2026-06-28
+- add `walk` new options (`asPaths`, `followSymlinks`, `glob`, `maxResults` and `signal`)
+- rename `walk` option `depthLimit` as `maxDepth`
+
 ## v0.5.0 | 2026-05-31
 - add `makeTempDir`, `makeTempFile` and `outputTempFile` functions
 - add `collect` option to `walk` function
