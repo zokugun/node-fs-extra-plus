@@ -359,12 +359,12 @@ describe('when opts.filter is true', () => {
 });
 
 describe('depth limit', () => {
-	function testDepthLimit(depthLimit: number, expected: string[], options: WalkOptions = {}) {
+	function testMaxDepth(maxDepth: number, expected: string[], options: WalkOptions = {}) {
 		for(const file of [path.join('a', 'b', 'c', 'd.txt'), path.join('a', 'e.jpg'), path.join('h', 'i', 'j', 'k.txt'), path.join('h', 'i', 'l.txt'), path.join('h', 'i', 'm.jpg'), 't.txt']) {
 			fse.outputFileSync(path.join(TEST_DIR, file), path.basename(file, path.extname(file)));
 		}
 
-		const result = fse.walkSync(TEST_DIR, { ...options, depthLimit });
+		const result = fse.walkSync(TEST_DIR, { ...options, maxDepth });
 		expect(result.fails).to.be.false;
 
 		let index = 0;
@@ -383,48 +383,48 @@ describe('depth limit', () => {
 		fse.emptyDirSync(TEST_DIR);
 	});
 
-	it('should honor depthLimit option -1', () => {
-		testDepthLimit(-1, ['a', path.join('a', 'b'), path.join('a', 'b', 'c'), path.join('a', 'b', 'c', 'd.txt'), path.join('a', 'e.jpg'), 'h', path.join('h', 'i'), path.join('h', 'i', 'j'), path.join('h', 'i', 'j', 'k.txt'), path.join('h', 'i', 'l.txt'), path.join('h', 'i', 'm.jpg'), 't.txt']);
+	it('should honor maxDepth option -1', () => {
+		testMaxDepth(-1, ['a', path.join('a', 'b'), path.join('a', 'b', 'c'), path.join('a', 'b', 'c', 'd.txt'), path.join('a', 'e.jpg'), 'h', path.join('h', 'i'), path.join('h', 'i', 'j'), path.join('h', 'i', 'j', 'k.txt'), path.join('h', 'i', 'l.txt'), path.join('h', 'i', 'm.jpg'), 't.txt']);
 	});
 
-	it('should honor depthLimit option 0', () => {
-		testDepthLimit(0, ['a', 'h', 't.txt']);
+	it('should honor maxDepth option 0', () => {
+		testMaxDepth(0, ['a', 'h', 't.txt']);
 	});
 
-	it('should honor depthLimit option 1', () => {
-		testDepthLimit(1, ['a', path.join('a', 'b'), path.join('a', 'e.jpg'), 'h', path.join('h', 'i'), 't.txt']);
+	it('should honor maxDepth option 1', () => {
+		testMaxDepth(1, ['a', path.join('a', 'b'), path.join('a', 'e.jpg'), 'h', path.join('h', 'i'), 't.txt']);
 	});
 
-	it('should honor depthLimit option 2', () => {
-		testDepthLimit(2, ['a', path.join('a', 'b'), path.join('a', 'b', 'c'), path.join('a', 'e.jpg'), 'h', path.join('h', 'i'), path.join('h', 'i', 'j'), path.join('h', 'i', 'l.txt'), path.join('h', 'i', 'm.jpg'), 't.txt']);
+	it('should honor maxDepth option 2', () => {
+		testMaxDepth(2, ['a', path.join('a', 'b'), path.join('a', 'b', 'c'), path.join('a', 'e.jpg'), 'h', path.join('h', 'i'), path.join('h', 'i', 'j'), path.join('h', 'i', 'l.txt'), path.join('h', 'i', 'm.jpg'), 't.txt']);
 	});
 
-	it('should honor depthLimit option 3', () => {
-		testDepthLimit(3, ['a', path.join('a', 'b'), path.join('a', 'b', 'c'), path.join('a', 'b', 'c', 'd.txt'), path.join('a', 'e.jpg'), 'h', path.join('h', 'i'), path.join('h', 'i', 'j'), path.join('h', 'i', 'j', 'k.txt'), path.join('h', 'i', 'l.txt'), path.join('h', 'i', 'm.jpg'), 't.txt']);
+	it('should honor maxDepth option 3', () => {
+		testMaxDepth(3, ['a', path.join('a', 'b'), path.join('a', 'b', 'c'), path.join('a', 'b', 'c', 'd.txt'), path.join('a', 'e.jpg'), 'h', path.join('h', 'i'), path.join('h', 'i', 'j'), path.join('h', 'i', 'j', 'k.txt'), path.join('h', 'i', 'l.txt'), path.join('h', 'i', 'm.jpg'), 't.txt']);
 	});
 
-	it('should honor depthLimit option -1 with onlyFiles = true', () => {
-		testDepthLimit(-1, [path.join('a', 'b', 'c', 'd.txt'), path.join('a', 'e.jpg'), path.join('h', 'i', 'j', 'k.txt'), path.join('h', 'i', 'l.txt'), path.join('h', 'i', 'm.jpg'), 't.txt'], { onlyFiles: true });
+	it('should honor maxDepth option -1 with onlyFiles = true', () => {
+		testMaxDepth(-1, [path.join('a', 'b', 'c', 'd.txt'), path.join('a', 'e.jpg'), path.join('h', 'i', 'j', 'k.txt'), path.join('h', 'i', 'l.txt'), path.join('h', 'i', 'm.jpg'), 't.txt'], { onlyFiles: true });
 	});
 
-	it('should honor depthLimit option 0 with onlyFiles = true', () => {
-		testDepthLimit(0, ['t.txt'], { onlyFiles: true });
+	it('should honor maxDepth option 0 with onlyFiles = true', () => {
+		testMaxDepth(0, ['t.txt'], { onlyFiles: true });
 	});
 
-	it('should honor depthLimit option 1 with onlyFiles = true', () => {
-		testDepthLimit(1, [path.join('a', 'e.jpg'), 't.txt'], { onlyFiles: true });
+	it('should honor maxDepth option 1 with onlyFiles = true', () => {
+		testMaxDepth(1, [path.join('a', 'e.jpg'), 't.txt'], { onlyFiles: true });
 	});
 
-	it('should honor depthLimit option -1 with onlyFiles = true and with a filter to search for a specific file', () => {
+	it('should honor maxDepth option -1 with onlyFiles = true and with a filter to search for a specific file', () => {
 		const filter = (item: WalkItem) => item.stats.isDirectory() || path.basename(item.path) === 'k.txt';
 
-		testDepthLimit(-1, [path.join('h', 'i', 'j', 'k.txt')], { onlyFiles: true, filter });
+		testMaxDepth(-1, [path.join('h', 'i', 'j', 'k.txt')], { onlyFiles: true, filter });
 	});
 
 	it('should return all files except under filtered out directory', () => {
 		const filter = (item: WalkItem) => !item.stats.isDirectory() || (item.stats.isDirectory() && path.basename(item.path) !== 'h');
 
-		testDepthLimit(-1, [path.join('a', 'b', 'c', 'd.txt'), path.join('a', 'e.jpg'), 't.txt'], { onlyFiles: true, filter });
+		testMaxDepth(-1, [path.join('a', 'b', 'c', 'd.txt'), path.join('a', 'e.jpg'), 't.txt'], { onlyFiles: true, filter });
 	});
 });
 

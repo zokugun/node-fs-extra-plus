@@ -23,6 +23,7 @@ import {
 } from '@zokugun/fs-path';
 import { createReadStream } from './create-read-stream/index.js';
 import { createWriteStream } from './create-write-stream/index.js';
+import * as globber from './globber/index.js';
 import { isFsError } from './is-fs-error/index.js';
 import { stringifyJSON, stringifyJson } from './stringify-json/index.js';
 import { stripBOM, stripBom } from './strip-bom/index.js';
@@ -108,6 +109,8 @@ import { touch } from './touch/sync.js';
 import { walk } from './walk/sync.js';
 import { writeJSON, writeJson } from './write-json/sync.js';
 
+const gb = globber;
+
 /* eslint-disable unicorn/prefer-export-from */
 export {
 	type FsResult,
@@ -149,7 +152,9 @@ export {
 	fsync,
 	ftruncate,
 	futimes,
+	gb,
 	glob,
+	globber,
 	isAbsolute,
 	isDir,
 	isEmptyDir,
@@ -264,7 +269,9 @@ const defaultExport: Omit<typeof import('./sync.js'), 'default'> = {
 	fsync,
 	ftruncate,
 	futimes,
+	gb,
 	glob,
+	globber,
 	isAbsolute,
 	isDir,
 	isEmptyDir,

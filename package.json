@@ -97,7 +97,9 @@
 		"@commitlint/config-conventional": "20.5.3",
 		"@types/klaw": "3.0.7",
 		"@types/klaw-sync": "6.0.5",
+		"@types/micromatch": "4.0.10",
 		"@types/node": "24.13.2",
+		"@types/picomatch": "4.0.3",
 		"@vitest/coverage-v8": "4.1.8",
 		"@vitest/ui": "4.1.8",
 		"@zokugun/fs-extra-plus": "0.5.0",
@@ -117,7 +119,10 @@
 		"xo": "0.60.0"
 	},
 	"optionalDependencies": {
-		"mime-types": "*"
+		"micromatch": "*",
+		"mime-types": "*",
+		"minimatch": "*",
+		"picomatch": "*"
 	},
 	"overrides": {
 		"@inquirer/core": {

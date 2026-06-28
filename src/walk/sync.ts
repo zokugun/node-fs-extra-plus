@@ -1,28 +1,44 @@
 import { type PathLike, type Stats } from 'node:fs';
 import path from 'node:path';
+import { isFunction } from '@zokugun/is-it-type';
 import { err, ok, type Result } from '@zokugun/xtry';
 import { lstat, stat, readdir } from '../fs/sync.js';
+import { pico } from '../globber/index.js';
 import { FsError } from '../types/fs-error.js';
-import { type WalkItem, type WalkOptions } from '../types/walk.js';
+import { type Globber, type WalkItem, type WalkOptions } from '../types/walk.js';
 import { toPathString } from '../utils/to-path-string.js';
 
+export function walk(dir: PathLike, options: WalkOptions & { collect: true; onlyPath: true }): Result<string[], NodeJS.ErrnoException | FsError>;
 export function walk(dir: PathLike, options: WalkOptions & { collect: true }): Result<WalkItem[], NodeJS.ErrnoException | FsError>;
+export function walk(dir: PathLike, options: WalkOptions & { onlyPath: true }): Result<Generator<Result<string, NodeJS.ErrnoException>>, NodeJS.ErrnoException | FsError>;
 export function walk(dir: PathLike, options?: WalkOptions): Result<Generator<Result<WalkItem, NodeJS.ErrnoException>>, NodeJS.ErrnoException | FsError>;
-export function walk(dir: PathLike, options: WalkOptions = {}): Result<Generator<Result<WalkItem, NodeJS.ErrnoException>> | WalkItem[], NodeJS.ErrnoException | FsError> {
+export function walk(dir: PathLike, options: WalkOptions = {}): Result<Generator<Result<WalkItem | string, NodeJS.ErrnoException>> | string[] | WalkItem[], NodeJS.ErrnoException | FsError> {
+	if(options.maxDepth === -1) {
+		options.maxDepth = Number.POSITIVE_INFINITY;
+	}
+
+	if(options.maxResults === -1) {
+		options.maxResults = Number.POSITIVE_INFINITY;
+	}
+
 	const {
 		absolute = false,
+		asPaths = false,
 		collect = false,
-		depthLimit = -1,
-		filter = () => true,
+		filter,
+		followSymlinks = true,
+		glob,
 		markDirectories = false,
+		maxDepth = Number.POSITIVE_INFINITY,
+		maxResults = Number.POSITIVE_INFINITY,
 		onlyDirectories = false,
 		onlyFiles = false,
 		preserveSymlinks = false,
+		signal,
 		sorter,
 		traverseAll = false,
 	} = options;
 
-	const maxDepth = depthLimit === -1 ? Number.POSITIVE_INFINITY : depthLimit;
 	const rootPath = toPathString(dir);
 	const basePath = path.resolve(rootPath);
 	const statFn = preserveSymlinks ? lstat : stat;
@@ -40,13 +56,29 @@ export function walk(dir: PathLike, options: WalkOptions = {}): Result<Generator
 		return err(error);
 	}
 
+	let matcher: Globber | undefined;
+
+	if(glob) {
+		if(isFunction(glob)) {
+			matcher = glob;
+		}
+		else {
+			matcher = pico(glob);
+		}
+	}
+
 	const rootItem = toItem(absolute ? basePath : '', rootStats.value);
 	let index = 0;
 
+	const isAllowed: (item: WalkItem, index: number) => boolean
+		= matcher
+			? (filter ? ((item, index) => matcher(item.path) && filter(item, index)) : (({ path }) => matcher(path)))
+			: (filter ?? (() => true));
+
 	const shouldInclude: (stats: Stats) => boolean
 		= onlyDirectories
-			? (onlyFiles ? () => false : (stats) => stats.isDirectory())
-			: (onlyFiles ? (stats) => stats.isFile() : () => true);
+			? (onlyFiles ? (() => false) : ((stats) => stats.isDirectory()))
+			: (onlyFiles ? ((stats) => stats.isFile()) : (() => true));
 
 	function toItem(currentPath: string, stats: Stats): WalkItem {
 		const yieldPath = absolute ? currentPath : path.relative(basePath, currentPath);
@@ -57,14 +89,23 @@ export function walk(dir: PathLike, options: WalkOptions = {}): Result<Generator
 		};
 	}
 
-	function * walkPath(currentPath: string, currentItem: WalkItem, depth: number, includeSelf: boolean): Generator<Result<WalkItem, NodeJS.ErrnoException>> {
+	function * walkPath(currentPath: string, currentItem: WalkItem, depth: number, includeSelf: boolean): Generator<Result<string | WalkItem, NodeJS.ErrnoException>> {
 		if(includeSelf && shouldInclude(currentItem.stats)) {
 			index += 1;
 
-			yield ok(currentItem);
+			if(asPaths) {
+				yield ok(currentItem.path);
+			}
+			else {
+				yield ok(currentItem);
+			}
 		}
 
-		if(!currentItem.stats.isDirectory() || depth > maxDepth) {
+		if(!currentItem.stats.isDirectory() || depth > maxDepth || index >= maxResults || (signal?.aborted)) {
+			return;
+		}
+
+		if(!followSymlinks && currentItem.stats.isSymbolicLink()) {
 			return;
 		}
 
@@ -88,7 +129,7 @@ export function walk(dir: PathLike, options: WalkOptions = {}): Result<Generator
 			}
 
 			const item = toItem(entryPath, entryStats.value);
-			const allowed = filter(item, index);
+			const allowed = isAllowed(item, index);
 
 			if(allowed) {
 				yield * walkPath(entryPath, item, depth + 1, true);
@@ -96,13 +137,17 @@ export function walk(dir: PathLike, options: WalkOptions = {}): Result<Generator
 			else if(traverseAll && entryStats.value.isDirectory()) {
 				yield * walkPath(entryPath, item, depth + 1, false);
 			}
+
+			if(index >= maxResults || (signal?.aborted)) {
+				return;
+			}
 		}
 	}
 
 	const generator = walkPath(basePath, rootItem, 0, false);
 
 	if(collect) {
-		const items: WalkItem[] = [];
+		const items: Array<string | WalkItem> = [];
 
 		for(const result of generator) {
 			if(result.fails) {
@@ -112,7 +157,7 @@ export function walk(dir: PathLike, options: WalkOptions = {}): Result<Generator
 			items.push(result.value);
 		}
 
-		return ok(items);
+		return ok(items as any);
 	}
 
 	return ok(generator);
