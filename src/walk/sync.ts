@@ -8,9 +8,13 @@ import { FsError } from '../types/fs-error.js';
 import { type Globber, type WalkItem, type WalkOptions } from '../types/walk.js';
 import { toPathString } from '../utils/to-path-string.js';
 
-export function walk(dir: PathLike, options: WalkOptions & { collect: true; onlyPath: true }): Result<string[], NodeJS.ErrnoException | FsError>;
+function * emptyGenerator(): Generator<Result<string | WalkItem, NodeJS.ErrnoException>> {
+	// no yield
+}
+
+export function walk(dir: PathLike, options: WalkOptions & { asPaths: true; collect: true }): Result<string[], NodeJS.ErrnoException | FsError>;
 export function walk(dir: PathLike, options: WalkOptions & { collect: true }): Result<WalkItem[], NodeJS.ErrnoException | FsError>;
-export function walk(dir: PathLike, options: WalkOptions & { onlyPath: true }): Result<Generator<Result<string, NodeJS.ErrnoException>>, NodeJS.ErrnoException | FsError>;
+export function walk(dir: PathLike, options: WalkOptions & { asPaths: true }): Result<Generator<Result<string, NodeJS.ErrnoException>>, NodeJS.ErrnoException | FsError>;
 export function walk(dir: PathLike, options?: WalkOptions): Result<Generator<Result<WalkItem, NodeJS.ErrnoException>>, NodeJS.ErrnoException | FsError>;
 export function walk(dir: PathLike, options: WalkOptions = {}): Result<Generator<Result<WalkItem | string, NodeJS.ErrnoException>> | string[] | WalkItem[], NodeJS.ErrnoException | FsError> {
 	if(options.maxDepth === -1) {
@@ -24,6 +28,7 @@ export function walk(dir: PathLike, options: WalkOptions = {}): Result<Generator
 	const {
 		absolute = false,
 		asPaths = false,
+		emptyIfDirMissing = false,
 		collect = false,
 		filter,
 		followSymlinks = true,
@@ -45,6 +50,15 @@ export function walk(dir: PathLike, options: WalkOptions = {}): Result<Generator
 
 	const rootStats = statFn(basePath);
 	if(rootStats.fails) {
+		if(emptyIfDirMissing) {
+			if(collect) {
+				return ok([]);
+			}
+			else {
+				return ok(emptyGenerator());
+			}
+		}
+
 		return rootStats;
 	}
 

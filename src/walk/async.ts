@@ -8,9 +8,13 @@ import { FsError } from '../types/fs-error.js';
 import { type WalkItem, type WalkOptions } from '../types/walk.js';
 import { toPathString } from '../utils/to-path-string.js';
 
-export async function walk(dir: PathLike, options: WalkOptions & { collect: true; onlyPath: true }): Promise<Result<string[], NodeJS.ErrnoException | FsError>>;
+async function * emptyGenerator(): AsyncGenerator<Result<string | WalkItem, NodeJS.ErrnoException>> {
+	// no yield
+}
+
+export async function walk(dir: PathLike, options: WalkOptions & { asPaths: true; collect: true }): Promise<Result<string[], NodeJS.ErrnoException | FsError>>;
 export async function walk(dir: PathLike, options: WalkOptions & { collect: true }): Promise<Result<WalkItem[], NodeJS.ErrnoException | FsError>>;
-export async function walk(dir: PathLike, options: WalkOptions & { onlyPath: true }): Promise<Result<AsyncGenerator<Result<string, NodeJS.ErrnoException>>, NodeJS.ErrnoException | FsError>>;
+export async function walk(dir: PathLike, options: WalkOptions & { asPaths: true }): Promise<Result<AsyncGenerator<Result<string, NodeJS.ErrnoException>>, NodeJS.ErrnoException | FsError>>;
 export async function walk(dir: PathLike, options?: WalkOptions): Promise<Result<AsyncGenerator<Result<WalkItem, NodeJS.ErrnoException>>, NodeJS.ErrnoException | FsError>>;
 export async function walk(dir: PathLike, options: WalkOptions = {}): Promise<Result<AsyncGenerator<Result<string | WalkItem, NodeJS.ErrnoException>> | string[] | WalkItem[], NodeJS.ErrnoException | FsError>> {
 	if(options.maxDepth === -1) {
@@ -24,6 +28,7 @@ export async function walk(dir: PathLike, options: WalkOptions = {}): Promise<Re
 	const {
 		absolute = false,
 		asPaths = false,
+		emptyIfDirMissing = false,
 		collect = false,
 		filter,
 		followSymlinks = true,
@@ -45,6 +50,15 @@ export async function walk(dir: PathLike, options: WalkOptions = {}): Promise<Re
 
 	const rootStats = await statFn(basePath);
 	if(rootStats.fails) {
+		if(emptyIfDirMissing) {
+			if(collect) {
+				return ok([]);
+			}
+			else {
+				return ok(emptyGenerator());
+			}
+		}
+
 		return rootStats;
 	}
 

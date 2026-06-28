@@ -12,6 +12,8 @@ export type WalkOptions = {
 	absolute?: boolean;
 	/** Return only path strings instead of full `WalkItem` objects. */
 	asPaths?: boolean;
+	/** When true, return no results if the directory is missing. */
+	emptyIfDirMissing?: boolean;
 	/** Collect and return all items as an array (rather than streaming them). */
 	collect?: boolean;
 	/** Function to include/exclude an item. Return true to include the item. */
