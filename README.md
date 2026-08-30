@@ -33,7 +33,7 @@ Usage
 
 **ESM / TypeScript**
 
-```ts
+```typescript
 import { ensureDir, pathExists, readJson, type FsVoidResult } from '@zokugun/fs-extra-plus/async';
 
 async function main(): Promise<FsVoidResult> {
@@ -56,10 +56,10 @@ async function main(): Promise<FsVoidResult> {
 
 **CommonJS**
 
-```js
-const { ensureDir, copy, type FsVoidResult } = require('@zokugun/fs-extra-plus/sync');
+```javascript
+const { ensureDir, copy } = require('@zokugun/fs-extra-plus/sync');
 
-function main(): FsVoidResult {
+function main() {
     const dir = ensureDir('dist/assets');
     if (dir.fails) {
         return dir;
@@ -72,10 +72,10 @@ function main(): FsVoidResult {
 }
 ```
 
-Entry points
+Entry Points
 ------------
 
-- `@zokugun/fs-extra-plus` — mixed bundle exporting both async, sync and mode helpers. **Functions have _Async_ or _Sync_ suffixes**
+- `@zokugun/fs-extra-plus` — mixed bundle exporting both async, sync and mode helpers. **Functions have *Async* or *Sync* suffixes**
 - `@zokugun/fs-extra-plus/async` — async helpers only. no suffixes.
 - `@zokugun/fs-extra-plus/sync` — sync helpers only. no suffixes.
 - `@zokugun/fs-extra-plus/mode` — mode helpers only.
