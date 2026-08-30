@@ -32,9 +32,9 @@ import { typeExports } from './types/exports.js';
 import type { FsResult, FsVoidResult } from './types/exports.js';
 import { FileHandle } from './types/file-handle.js';
 import { FsError } from './types/fs-error.js';
-import { type ReadStreamOptions, type WriteStreamOptions } from './types/stream.js';
-import { type StringifyJsonOptions } from './types/stringify-json.js';
-import { type WalkItem, type WalkOptions } from './types/walk.js';
+import type { ReadStreamOptions, WriteStreamOptions } from './types/stream.js';
+import type { StringifyJsonOptions } from './types/stringify-json.js';
+import type { Globber, WalkItem, WalkOptions } from './types/walk.js';
 
 import {
 	access,
@@ -118,6 +118,7 @@ const gb = globber;
 export {
 	type FsResult,
 	type FsVoidResult,
+	type Globber,
 	type PlatformPath,
 	type ReadStreamOptions,
 	type StringifyJsonOptions,
