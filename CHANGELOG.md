@@ -1,5 +1,8 @@
 # Changelog
 
+## v0.6.2 | 2026-08-30
+- export `Globber` type
+
 ## v0.6.1 | 2026-06-28
 - add `emptyIfDirMissing` option to `walk`
 - fix `walk` types with `asPaths` option
