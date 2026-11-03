@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog][keepachangelog], and this project adheres to [Semantic Versioning][semver].
 
+[Unreleased]
+------------
+
+### Fixed
+
+- `mime-types` is optional in the `openAsBlob` function
+
 [v0.6.2] | 2026-08-30
 ---------------------
 
