@@ -12,6 +12,10 @@ The format is based on [Keep a Changelog][keepachangelog], and this project adhe
 
 - `mime-types` is optional in the `openAsBlob` function
 
+### Changed
+
+- update `@zokugun/fs-path` dependency
+
 [v0.6.2] | 2026-08-30
 ---------------------
 
