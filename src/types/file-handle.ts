@@ -1,11 +1,12 @@
 import { type Abortable } from 'node:events';
-import { type BigIntStats, type Mode, type ObjectEncodingOptions, type ReadOptions, type ReadOptionsWithBuffer, type ReadPosition, type ReadStream, type ReadVResult, type StatOptions, type Stats, type TimeLike, type WriteOptions, type WriteStream, type WriteVResult } from 'node:fs';
+import { ReadFileOptions, ReadFileOptionsWithBuffer, ReadFileOptionsWithBufferEncoding, ReadFileOptionsWithStringEncoding, type BigIntStats, type Mode, type ObjectEncodingOptions, type ReadOptions, type ReadOptionsWithBuffer, type ReadPosition, type ReadStream, type ReadVResult, type StatOptions, type Stats, type TimeLike, type WriteOptions, type WriteStream, type WriteVResult } from 'node:fs';
 import { type CreateReadStreamOptions, type CreateWriteStreamOptions, type FileReadResult, type FileHandle as NodeFileHandle, type ReadableWebStreamOptions } from 'node:fs/promises';
 import { type Interface as ReadlineInterface } from 'readline';
 import { isRecord } from '@zokugun/is-it-type';
 import { xtry, xtrySync } from '@zokugun/xtry/async';
 import { type FsResult } from './fs-result.js';
 import { type FsVoidResult } from './fs-void-result.js';
+import { BufferView } from 'node:buffer';
 
 type FileWriteResult<T> = { bytesWritten: number; buffer: T };
 
@@ -73,10 +74,12 @@ export class FileHandle {
 		return xtrySync(() => this.handle.readableWebStream(options));
 	}
 
-	readFile(options?: ({ encoding?: null | undefined } & Abortable) | null): Promise<FsResult<NonSharedBuffer>>;
-	readFile(options: ({ encoding: BufferEncoding } & Abortable) | BufferEncoding): Promise<FsResult<string>>;
-	async readFile(options?: (ObjectEncodingOptions & Abortable) | BufferEncoding | null): Promise<FsResult<string | NonSharedBuffer>> {
-		return xtry(async () => this.handle.readFile(options));
+	readFile<T extends NodeJS.ArrayBufferView>(options: Omit<ReadFileOptionsWithBuffer<T>, 'flag'>): Promise<FsResult<BufferView<T>>>;
+	readFile(options?: Omit<ReadFileOptionsWithBufferEncoding, "flag"> | null): Promise<FsResult<NonSharedBuffer>>;
+	readFile(options: Omit<ReadFileOptionsWithStringEncoding, "flag"> | BufferEncoding): Promise<FsResult<string>>;
+	readFile(options: Omit<ReadFileOptions, "flag"> | BufferEncoding | null): Promise<FsResult<string | NonSharedBuffer>>;
+	async readFile<T extends NodeJS.ArrayBufferView = NodeJS.ArrayBufferView>(options?: Omit<ReadFileOptionsWithBuffer<T> | ReadFileOptionsWithBufferEncoding | ReadFileOptionsWithStringEncoding | ReadFileOptions, 'flag'> | BufferEncoding | null): Promise<FsResult<BufferView<T> | NonSharedBuffer | string>> {
+		return xtry(async () => this.handle.readFile(options ?? null));
 	}
 
 	readLines(options?: CreateReadStreamOptions): FsResult<ReadlineInterface> {
@@ -91,7 +94,7 @@ export class FileHandle {
 	stat(options: StatOptions & { bigint: true }): Promise<FsResult<BigIntStats>>;
 	stat(options: StatOptions): Promise<FsResult<Stats | BigIntStats>>;
 	async stat(options?: StatOptions): Promise<FsResult<Stats | BigIntStats>> {
-		return xtry(async () => this.handle.stat(options));
+		return xtry(async () => this.handle.stat({ ...options, throwIfNoEntry: true}) as Promise<Stats | BigIntStats>);
 	}
 
 	async truncate(length?: number): Promise<FsVoidResult> {
