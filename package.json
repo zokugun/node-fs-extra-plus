@@ -90,7 +90,7 @@
 	"dependencies": {
 		"@zokugun/fs-path": "0.2.1",
 		"@zokugun/is-it-type": "0.8.1",
-		"@zokugun/xtry": "0.12.1"
+		"@zokugun/xtry": "0.12.2"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "20.5.3",
