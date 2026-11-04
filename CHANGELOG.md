@@ -174,7 +174,9 @@ The format is based on [Keep a Changelog][keepachangelog], and this project adhe
 
 [keepachangelog]: https://keepachangelog.com/en/2.0.0/
 [semver]: https://semver.org/spec/v2.0.0.html
-[unreleased]: https://github.com/zokugun/node-fs-extra-plus/compare/v0.6.2...HEAD
+[unreleased]: https://github.com/zokugun/node-fs-extra-plus/compare/v0.6.4...HEAD
+[v0.6.4]: https://github.com/zokugun/node-fs-extra-plus/releases/tag/v0.6.4
+[v0.6.3]: https://github.com/zokugun/node-fs-extra-plus/releases/tag/v0.6.3
 [v0.6.2]: https://github.com/zokugun/node-fs-extra-plus/releases/tag/v0.6.2
 [v0.6.1]: https://github.com/zokugun/node-fs-extra-plus/releases/tag/v0.6.1
 [v0.6.0]: https://github.com/zokugun/node-fs-extra-plus/releases/tag/v0.6.0
