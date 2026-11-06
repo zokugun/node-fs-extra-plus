@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog][keepachangelog], and this project adheres to [Semantic Versioning][semver].
 
+[Unreleased]
+------------
+
+### Changed
+
+- use latest version of the dependencies
+
 [v0.6.5] | 2026-11-04
 ---------------------
 
