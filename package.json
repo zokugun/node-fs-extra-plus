@@ -88,7 +88,7 @@
 		"watch:test": "tsc-watch -p test"
 	},
 	"dependencies": {
-		"@zokugun/fs-path": "0.2.2",
+		"@zokugun/fs-path": "0.3.0",
 		"@zokugun/is-it-type": "0.8.1",
 		"@zokugun/xtry": "0.12.2"
 	},

@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog][keepachangelog], and this project adheres to [Semantic Versioning][semver].
 
+[Unreleased]
+------------
+
+### Changed
+
+- update `@zokugun/fs-path` dependency to:
+   - update `normalize` function (on posix, recognizes both separators and replaces them with the preferred separator)
+   - fix `isSafePath` function on Windows
+   - add functions to `add`, `ensure`, `get`, `remove`, `replace` and `trim` extensions
+
 [v0.6.6] | 2026-11-06
 ---------------------
 
@@ -31,11 +41,8 @@ The format is based on [Keep a Changelog][keepachangelog], and this project adhe
 
 ### Fixed
 
-- `mime-types` is optional in the `openAsBlob` function
-
-### Changed
-
-- update `@zokugun/fs-path` dependency
+- the `mime-types` dependency is optional in the `openAsBlob` function
+- update `@zokugun/fs-path` dependency to fix `isSafeSegment` function
 
 [v0.6.2] | 2026-08-30
 ---------------------
