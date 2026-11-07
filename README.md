@@ -1,11 +1,13 @@
 [@zokugun/fs-extra-plus](https://github.com/zokugun/node-fs-extra-plus)
 =======================================================================
 
-[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
-[![NPM Version](https://img.shields.io/npm/v/@zokugun/fs-extra-plus.svg?colorB=green)](https://www.npmjs.com/package/@zokugun/fs-extra-plus)
-[![Donation](https://img.shields.io/badge/donate-ko--fi-green)](https://ko-fi.com/daiyam)
-[![Donation](https://img.shields.io/badge/donate-liberapay-green)](https://liberapay.com/daiyam/donate)
-[![Donation](https://img.shields.io/badge/donate-paypal-green)](https://paypal.me/daiyam99)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue)](./LICENSE)
+[![NPM Version](https://img.shields.io/npm/v/@zokugun/fs-extra-plus?color=brightgreen)](https://www.npmjs.com/package/@zokugun/fs-extra-plus)
+[![NodeJS Version](https://img.shields.io/badge/node.js-%3E%3D%2018.20-green)](#requirements)
+[![Modules](https://img.shields.io/badge/modules-ESM%20%7C%20CJS-green)](#requirements)
+[![Ko-fi](https://img.shields.io/badge/Ko--fi-f87171?logo=kofi&logoColor=white)](https://ko-fi.com/daiyam)
+[![Liberapay](https://img.shields.io/badge/Liberapay-facc15?logo=liberapay&logoColor=black)](https://liberapay.com/daiyam/donate)
+[![PayPal](https://img.shields.io/badge/PayPal-5277C3?logo=paypal&logoColor=white)](https://paypal.me/daiyam99)
 
 > Wraps `node:fs` to fully typed functions that resolve to a `Result`. Includes additional helpers.
 
@@ -16,7 +18,6 @@ Overview
 
 - rewriting everything in strict TypeScript so typings always match the implementation,
 - every functions resolves to a [`Result`](https://github.com/zokugun/node-xtry) object instead of throwing. So you handle errors explicitly without exceptions.
-- publishing dual ESM/CJS builds with identical named exports,
 - tracking the latest Node.js `fs` additions (including `glob`, `mkdtempDisposable`, etc.),
 - shipping first-party async and sync entry points to help bundlers tree-shake unused helpers,
 - documenting the [mode helpers](docs/mode.md) so you can translate permissions between number, octal, stat, symbolic, and object forms.
@@ -27,6 +28,12 @@ Installation
 ```bash
 npm add @zokugun/fs-extra-plus
 ```
+
+Requirements
+------------
+
+- **Node.js**: `v18.20` or higher
+- **Modules**: ECMAScript Modules (`ESM`) or CommonJS (`CJS`)
 
 Usage
 -----
