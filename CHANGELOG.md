@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog][keepachangelog], and this project adheres to [Semantic Versioning][semver].
 
+[Unreleased]
+------------
+
+### Changed
+
+- update `@zokugun/fs-path` dependency to:
+   - rename the `sanitize` function as `sanitizePath`
+   - rename the functions `leafExt` and `leafName` as `baseExt` and `baseName`
+   - add the functions `sanitizeSegment`, `validatePath` and `validateSegment`
+
 [v0.7.0] | 2026-11-07
 ---------------------
 
