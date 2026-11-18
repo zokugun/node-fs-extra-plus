@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog][keepachangelog], and this project adheres to [Semantic Versioning][semver].
 
+[Unreleased]
+------------
+
+### Maintenance
+
+- update `@zokugun/fs-path` dependency
+
 [v0.8.0] | 2026-11-18
 ---------------------
 
