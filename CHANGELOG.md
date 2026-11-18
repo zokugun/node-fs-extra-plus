@@ -5,8 +5,8 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog][keepachangelog], and this project adheres to [Semantic Versioning][semver].
 
-[Unreleased]
-------------
+[v0.8.1] | 2026-11-18
+---------------------
 
 ### Maintenance
 
@@ -212,7 +212,8 @@ The format is based on [Keep a Changelog][keepachangelog], and this project adhe
 
 [keepachangelog]: https://keepachangelog.com/en/2.0.0/
 [semver]: https://semver.org/spec/v2.0.0.html
-[unreleased]: https://github.com/zokugun/node-fs-extra-plus/compare/v0.8.0...HEAD
+[unreleased]: https://github.com/zokugun/node-fs-extra-plus/compare/v0.8.1...HEAD
+[v0.8.1]: https://github.com/zokugun/node-fs-extra-plus/releases/tag/v0.8.1
 [v0.8.0]: https://github.com/zokugun/node-fs-extra-plus/releases/tag/v0.8.0
 [v0.7.0]: https://github.com/zokugun/node-fs-extra-plus/releases/tag/v0.7.0
 [v0.6.6]: https://github.com/zokugun/node-fs-extra-plus/releases/tag/v0.6.6
